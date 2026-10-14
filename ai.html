@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="FrogNutri AI – trợ lý hỏi đáp về dự án bột ếch, nguyên liệu, quy trình, dinh dưỡng và cách sử dụng dựa trên thông tin đã công bố.">
+  <title>FrogNutri AI | Trợ lý dinh dưỡng</title>
+  <link rel="icon" href="assets/img/frognutri-logo.jpg">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .links{align-items:center;gap:clamp(8px,1vw,16px)}
+    .social-nav{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border:1px solid #dcebe3;border-radius:999px;background:#fff;color:#245b43;font-size:13px;font-weight:750;text-decoration:none;white-space:nowrap;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+    .social-nav:hover{transform:translateY(-2px);box-shadow:0 6px 18px #164e351a;background:#f2fbf5}
+    .social-nav svg{width:18px;height:18px;fill:currentColor;flex:none}
+    .tiktok-nav{background:#17221d;color:#fff;border-color:#17221d}.tiktok-nav:hover{background:#304b3e;color:#fff}.facebook-nav{color:#1766d1}
+    @media(max-width:980px){.links .social-nav{width:100%;justify-content:flex-start;border-radius:12px;padding:11px 13px}}
+    .ai-layout{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(250px,.85fr);gap:24px;align-items:start}
+    .chat-panel{overflow:hidden;padding:0;min-width:0}
+    .chat-heading{padding:22px 24px;background:linear-gradient(135deg,#eaf8ef,#f6fbf7);border-bottom:1px solid #dcebe3;display:flex;align-items:center;gap:14px}
+    .bot-avatar{width:48px;height:48px;border-radius:16px;background:#d8f0df;display:grid;place-items:center;font-size:27px;flex:none}
+    .chat-heading h2{margin:0 0 4px}.chat-heading p{margin:0;color:var(--muted);font-size:14px}
+    .online-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#26965d;margin-right:6px}
+    .chat-body{height:min(56vh,540px);min-height:330px;overflow:auto;padding:22px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth;background:#fff}
+    .bubble{max-width:88%;padding:13px 15px;border-radius:16px;line-height:1.65;overflow-wrap:anywhere;white-space:pre-wrap}
+    .bubble.bot{align-self:flex-start;background:#f0f6f2;border:1px solid #e0ebe4;border-bottom-left-radius:5px;color:#233b2e}
+    .bubble.me{align-self:flex-end;background:#245b43;color:white;border-bottom-right-radius:5px}
+    .bubble small{display:block;margin-top:7px;opacity:.75;font-size:11px}
+    .quick{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 17px;background:white}
+    .quick button{border:1px solid #d8e9dd;background:#f8fcf9;color:#245b43;padding:8px 11px;border-radius:999px;cursor:pointer;font:inherit;font-size:13px}
+    .quick button:hover{background:#eaf7ee}.quick button:disabled{opacity:.5;cursor:not-allowed}
+    .chat-input{display:flex;gap:10px;padding:16px 20px;border-top:1px solid #e6eee8;background:#fff}
+    .chat-input input{flex:1;min-width:0;border:1px solid #d5e3da;border-radius:12px;padding:13px 14px;font:inherit;outline:none}
+    .chat-input input:focus{border-color:#39845d;box-shadow:0 0 0 3px #39845d1a}
+    .chat-input button{white-space:nowrap}.chat-input button:disabled{opacity:.55;cursor:not-allowed}
+    .info-card{padding:22px}.info-card h3{margin-top:0}.topic-list{display:grid;gap:10px}.topic-list button{text-align:left;display:flex;gap:10px;align-items:flex-start;width:100%;padding:12px;border:1px solid #e1ece4;border-radius:12px;background:#fff;color:inherit;cursor:pointer;font:inherit}.topic-list button:hover{background:#f4fbf6;border-color:#b9d9c4}.topic-list strong{display:block;color:#245b43;margin-bottom:3px}.topic-list span{font-size:13px;color:var(--muted);line-height:1.45}
+    .notice{font-size:13px;line-height:1.6;color:var(--muted);padding:12px 14px;border-radius:12px;background:#f7f8f7;margin-top:16px}
+    .hidden{display:none!important}
+    .lock-card{text-align:center;padding:38px 24px}.lock-card .icon{font-size:30px;margin-bottom:10px}
+    .typing{display:inline-flex;gap:4px;align-items:center}.typing i{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.6;animation:fnpulse 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+    @keyframes fnpulse{50%{opacity:.2;transform:translateY(-2px)}}
+    @media(max-width:850px){.ai-layout{grid-template-columns:1fr}.chat-body{height:52vh;min-height:300px}.info-card{order:2}}
+    @media(max-width:520px){.chat-heading{padding:17px}.chat-body{padding:15px}.bubble{max-width:95%}.chat-input{padding:12px;gap:7px}.chat-input .btn{padding-inline:13px}.quick{padding-inline:12px}}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+    window.FN_SUPABASE_URL ||= 'https://aoqshriypbwkadprzxgy.supabase.co';
+    window.FN_SUPABASE_PUBLISHABLE_KEY ||= 'sb_publishable_5dpQ-GK4H4YSyUfcZ1b63A_YlLrsnnU';
+    window.FN_SUPABASE_READY = true;
+    document.documentElement.classList.add('fn-auth-check');
+  </script>
+</head>
+<body>
+  <div class="topbar"><div class="container"><span>🐸 FrogNutri • Từ giá trị bỏ quên đến dinh dưỡng tiện lợi</span><span>🌱 Phiên bản phát triển 2026–2027</span></div></div>
+  <nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">
+      <img src="assets/img/frognutri-logo.jpg" alt="FrogNutri">
+      <div>
+        <strong>FrogNutri</strong>
+        <small>Từ giá trị bỏ quên đến dinh dưỡng tiện lợi.</small>
+      </div>
+    </a>
+    <button class="mobile-toggle" data-mobile aria-label="Mở menu" aria-expanded="false" type="button">☰</button>
+    <div class="links">
+      <a href="index.html">Trang chủ</a>
+      <a href="product.html">Sản phẩm</a>
+      <a href="ingredients.html">Nguyên liệu</a>
+      <a href="research.html">FrogNutri Lab</a>
+      <a href="ai.html" class="active">Chat bot</a>
+      <a href="account.html" data-account-link>Tài khoản</a>
+      <a class="social-nav facebook-nav" href="https://www.facebook.com/share/1M3Qi7Em8s/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="FrogNutri trên Facebook" title="Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8z"/></svg>
+        <span>Facebook</span>
+      </a>
+      <a class="social-nav tiktok-nav" href="https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j" target="_blank" rel="noopener noreferrer" aria-label="Đặt mua trên TikTok FrogNutri" title="TikTok Shop">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 7.1a6.8 6.8 0 0 1-4.2-1.4v8.1a5.8 5.8 0 1 1-5-5.7v3.2a2.7 2.7 0 1 0 1.9 2.6V2.5h3.1c.2 2 1.8 3.6 4.2 3.9z"/></svg>
+        <span>TikTok Shop</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+  <section class="page-hero"><div class="container reveal"><span class="eyebrow">🤖 Trợ lý hỏi đáp FrogNutri</span><h1>FrogNutri AI</h1><p class="lead">Hỏi về ý tưởng dự án, nguyên liệu, quy trình chế biến, số liệu kiểm nghiệm, cách dùng và bảo quản bột ếch. Trợ lý ưu tiên thông tin trong hồ sơ dự án và sẽ nói rõ khi chưa có dữ liệu xác thực.</p></div></section>
+
+  <section class="section"><div class="container ai-layout">
+    <div class="protected">
+      <div id="chatGate" class="card lock-card"><div class="icon lav">🔐</div><h3>Đăng nhập để trò chuyện</h3><p>Trợ lý FrogNutri AI chỉ sử dụng được khi bạn đăng nhập hoặc tạo tài khoản.</p><button class="btn primary" data-open-auth="login">Đăng nhập để tiếp tục</button></div>
+      <div id="chatBox" class="card chat-panel hidden" aria-label="Khung trò chuyện FrogNutri AI">
+        <div class="chat-heading"><div class="bot-avatar">🐸</div><div><h2>FrogNutri AI</h2><p><span class="online-dot"></span>Trợ lý thông tin dự án</p></div></div>
+        <div class="chat-body" id="chatBody" aria-live="polite"><div class="bubble bot">Xin chào! Mình là FrogNutri AI 🐸\n\nBạn có thể hỏi mình về dự án, nguyên liệu, quy trình, số liệu kiểm nghiệm, sản phẩm và cách dùng. Mình cũng có thể tính protein, chất béo và canxi theo số gram bột thân ếch từ dữ liệu mẫu được cung cấp.\n\nMình sẽ phân biệt rõ số liệu được nêu trong hồ sơ với thông tin chưa có căn cứ.</div></div>
+        <div class="quick" aria-label="Câu hỏi gợi ý"><button data-q="FrogNutri là dự án gì và có điểm mới nào?">Giới thiệu dự án</button><button data-q="Quy trình làm bột ếch gồm những bước nào?">Quy trình chế biến</button><button data-q="Trong 10 g bột thân ếch có bao nhiêu protein, chất béo và canxi?">Tính dinh dưỡng</button><button data-q="Báo cáo ghi hàm lượng canxi bao nhiêu?">Số liệu canxi</button><button data-q="Cách sử dụng và bảo quản bột ếch theo báo cáo?">Cách dùng & bảo quản</button></div>
+        <form class="chat-input" id="chatForm"><input id="chatInput" placeholder="Nhập câu hỏi về FrogNutri..." autocomplete="off" maxlength="1200" aria-label="Nhập câu hỏi"><button class="btn primary" id="sendChat" type="submit">Gửi</button></form>
+      </div>
+    </div>
+    <aside class="card info-card reveal"><h3>💡 Bạn có thể hỏi</h3><div class="topic-list">
+      <button type="button" data-q="Vì sao nhóm chọn phần thân ếch để làm bột?"><div>♻️</div><div><strong>Ý tưởng & tính sáng tạo</strong><span>Tận dụng phụ phẩm, giảm lãng phí và tăng giá trị nguyên liệu.</span></div></button>
+      <button type="button" data-q="Vai trò của sả, gừng và vỏ quế trong quy trình là gì?"><div>🌿</div><div><strong>Nguyên liệu</strong><span>Vai trò của thân ếch, sả, gừng và vỏ quế.</span></div></button>
+      <button type="button" data-q="Báo cáo ghi những chỉ tiêu dinh dưỡng nào? Số liệu nào đã được nêu rõ?"><div>🧪</div><div><strong>Dinh dưỡng & kiểm nghiệm</strong><span>Tra cứu số liệu kiểm nghiệm và tính protein, chất béo, canxi ngay trong cuộc trò chuyện.</span></div></button>
+      <button type="button" data-q="Làm sao ước tính lượng canxi theo số gram bột? Hãy nêu giới hạn của phép tính."><div>🧮</div><div><strong>Tính toán theo khối lượng</strong><span>Ước tính từ số liệu có sẵn, không tự suy đoán hàm lượng.</span></div></button>
+      <button type="button" data-q="Cách dùng bột ếch cho trẻ nhỏ có những lưu ý an toàn nào?"><div>🛡️</div><div><strong>Lưu ý khi sử dụng</strong><span>Thông tin tham khảo, không thay thế tư vấn chuyên môn y tế.</span></div></button>
+    </div><div class="notice">Lưu ý: chatbot cung cấp thông tin tham khảo dựa trên hồ sơ dự án, không chẩn đoán hay điều trị bệnh. Khi hồ sơ không nêu rõ một chỉ tiêu, trợ lý sẽ không tự tạo ra con số.</div></aside>
+  </div></section>
+
+  <footer class="footer"><div class="container footer-grid"><div><h3 style="color:#fff">FrogNutri 🐸</h3><p>Từ giá trị bỏ quên đến dinh dưỡng tiện lợi.</p><p>Dự án nghiên cứu tận dụng phần thân ếch để phát triển sản phẩm bột dinh dưỡng, kết hợp nền tảng số giúp người dùng tra cứu thông tin thuận tiện.</p></div><div><b>Khám phá</b><p><a href="research.html">FrogNutri Lab</a><br><a href="product.html#documents">Hồ sơ kiểm nghiệm</a><br><a href="product.html">Thông tin sản phẩm</a></p></div><div><b>Kết nối</b><p><a href="https://www.facebook.com/share/1MTS1ZrXDZ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook FrogNutri ↗</a><br><a href="https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j" target="_blank" rel="noopener noreferrer">TikTok FrogNutri ↗</a><br>Website phát triển 2026–2027</p></div></div></footer>
+
+  <div class="modal" id="authModal"><div class="modal-box"><button class="modal-close" data-close-auth aria-label="Đóng">×</button><span class="eyebrow">FrogNutri Account</span><h2>Đăng nhập / tạo tài khoản</h2><form id="authForm"><label for="authName">Họ tên</label><input id="authName" required><label for="authEmail">Email</label><input id="authEmail" type="email" required><button class="btn primary full" type="submit">Tiếp tục</button></form></div></div>
+  <div id="toast" class="toast"></div>
+  <script src="script.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const gate = document.getElementById('chatGate');
+    const box = document.getElementById('chatBox');
+    const body = document.getElementById('chatBody');
+    const input = document.getElementById('chatInput');
+    const form = document.getElementById('chatForm');
+    const sendButton = document.getElementById('sendChat');
+    let sending = false;
+
+    const normalize = value => String(value ?? '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/[^a-z0-9.%\s-]/g, ' ').replace(/\s+/g, ' ').trim();
+    function loggedIn(){ try { return typeof FN !== 'undefined' && typeof FN.user === 'function' && !!FN.user(); } catch { return false; } }
+    function updateAccess(){
+      const ok = loggedIn(); gate?.classList.toggle('hidden', ok); box?.classList.toggle('hidden', !ok);
+      if(input){input.disabled=!ok;input.placeholder=ok?'Nhập câu hỏi về FrogNutri...':'Đăng nhập để sử dụng chatbot';}
+      if(sendButton) sendButton.disabled=!ok;
+      document.querySelectorAll('[data-q]').forEach(b=>b.disabled=!ok);
+    }
+    updateAccess(); window.addEventListener('pageshow', updateAccess);
+    window.addEventListener('storage', e=>{if(['fn_user','frognutri_user','currentUser'].includes(e.key)) updateAccess();});
+
+    const facts = [
+      {keys:['frognutri la gi','du an la gi','gioi thieu du an','muc tieu du an','y tuong'], answer:'FrogNutri là dự án nghiên cứu phát triển bột dinh dưỡng từ phần thân ếch – phần thường có giá trị thương mại thấp hơn đùi ếch. Ý tưởng là tận dụng nguyên liệu địa phương, kết hợp thịt và phần xương đã xử lý thành bột mịn, đồng thời dùng website và mã QR để hỗ trợ tra cứu thông tin sản phẩm.'},
+      {keys:['tai sao chon than ech','vi sao than ech','tan dung phu pham','diem moi','tinh sang tao','kinh te tuan hoan'], answer:'Theo báo cáo, nhóm chọn phần thân ếch vì phần này thường có giá trị bán thấp hơn đùi ếch và có nguy cơ bị lãng phí nếu không được tận dụng. Nhóm nghiên cứu chế biến thành bột mịn để tăng tính tiện dụng, giảm lãng phí nguyên liệu và nâng giá trị kinh tế. Đây là mô tả về mục tiêu và hướng nghiên cứu của dự án, không tự nó thay thế đánh giá độc lập về hiệu quả thực tế.'},
+      {keys:['nguon ech','ech o dau','nguon nguyen lieu'], answer:'Báo cáo cho biết nguyên liệu thân ếch được lấy từ cơ sở nuôi của gia đình một thành viên trong nhóm; phần đùi được tách riêng, còn phần thân dùng làm bột. Hồ sơ cũng mô tả cơ sở có giấy tờ liên quan đến điều kiện an toàn thực phẩm và nguồn nguyên liệu. Khi cần xác minh cụ thể, bạn nên xem bản giấy chứng nhận và hồ sơ kiểm nghiệm gốc trong mục FrogNutri Lab.'},
+      {keys:['quy trinh','cac buoc che bien','lam bot','san xuat','say 70','say bao lau'], answer:'Quy trình được mô tả trong báo cáo gồm: (1) sơ chế và làm sạch ếch, tách phần thân; (2) hấp khoảng 15 phút cùng sả, gừng và vỏ quế; (3) xay nhuyễn, có dùng nước hấp theo mô tả; (4) sấy ở khoảng 70°C trong khoảng 2 giờ 15 phút; (5) nghiền khô và rây mịn; (6) cân định lượng; (7) đóng túi zip lót nhôm, kèm gói hút ẩm, nhãn và mã QR; (8) bảo quản phù hợp. Thời gian/nhiệt độ trên là thông tin trong báo cáo dự án, không phải xác nhận rằng mọi mẻ đều đạt chuẩn an toàn nếu chưa được kiểm soát và kiểm nghiệm.'},
+      {keys:['sa','gung','vo que','thao moc','khu mui','mui tanh'], answer:'Theo báo cáo, sả, gừng và vỏ quế được dùng trong bước hấp để hỗ trợ giảm mùi tanh và tạo mùi thơm thảo mộc. Đây là mục đích công thức mà nhóm nêu ra; không nên hiểu là bằng chứng y khoa rằng các nguyên liệu này điều trị bệnh hoặc bảo đảm phù hợp với mọi người.'},
+      {keys:['uu diem','loi ich','han che','nhuoc diem','gia tri nguyen lieu'], answer:'Ưu điểm: bột thân ếch giúp tận dụng phần nguyên liệu chưa được khai thác tối ưu, thuận tiện cân định lượng, phối trộn và nghiên cứu công thức thực phẩm. Theo dữ liệu kiểm nghiệm mẫu được cung cấp, protein 57,4%, chất béo tổng 16,8% và canxi 5.676 mg/100 g. Hạn chế: hương vị có thể chưa hợp mọi người; cần kiểm soát độ ẩm, vệ sinh, bao bì, bảo quản và độ ổn định; hàm lượng có thể khác giữa các lô. Người dị ứng với ếch cần tránh dùng. Không có căn cứ để nói sản phẩm chữa bệnh, thay thế sữa hoặc đáp ứng toàn bộ nhu cầu dinh dưỡng.'},
+      {keys:['canxi','calcium','5676','photpho','phospho'], answer:'Dữ liệu kiểm nghiệm mẫu được cung cấp nêu canxi 5.676 mg/100 g, tương đương phép tính 56,76 mg/g. Đây là con số rất cao nên cần đối chiếu phiếu VietLabs gốc để xác nhận đúng mẫu, đơn vị, phương pháp và kết quả trước khi dùng trong quảng bá hoặc tư vấn khẩu phần. Nếu chỉ tính toán theo số liệu này, x g bột tương đương 56,76 × x mg canxi; đây không phải xác nhận mọi lô đều có mức đó.'},
+      {keys:['protein','dam','chat dam'], answer:'Theo dữ liệu kiểm nghiệm mẫu được cung cấp, bột thân ếch có protein 57,4% (xấp xỉ 57,4 g protein/100 g bột). Ước tính: số gram bột × 0,574 = số gram protein. Ví dụ 5 g bột ≈ 2,87 g protein; 10 g ≈ 5,74 g; 20 g ≈ 11,48 g. Đây là phép tính dựa trên kết quả của mẫu được nêu, không bảo đảm mọi lô hay thành phẩm sau phối trộn có cùng hàm lượng.'},
+      {keys:['chat beo','lipid','fat'], answer:'Theo dữ liệu kiểm nghiệm mẫu được cung cấp, chất béo tổng là 16,8% (khoảng 16,8 g/100 g bột). Ước tính số gram chất béo = số gram bột × 0,168. Ví dụ 10 g bột tương đương khoảng 1,68 g chất béo. Đây là ước tính theo mẫu được báo cáo; hãy kiểm tra phiếu gốc và nhãn của lô thực tế.'},
+      {keys:['omega','do am','nang luong','calo','kcal'], answer:'Dữ liệu hiện có nêu protein 57,4%, chất béo tổng 16,8% và canxi 5.676 mg/100 g cho mẫu được cung cấp; độ ẩm dưới 5% cũng được nhắc trong hồ sơ dự án. Chưa có số liệu đủ tin cậy ở đây để xác định omega-3 hoặc năng lượng kcal. Không nên suy ra số liệu này chỉ từ protein và chất béo; hãy tra phiếu kiểm nghiệm hoặc phân tích thành phẩm.'},
+      {keys:['khoai lang tim','anthocyanin','khoai tim'], answer:'Khoai lang tím cung cấp tinh bột, chất xơ và các hợp chất thực vật, trong đó có anthocyanin tạo màu tím. Hàm lượng anthocyanin phụ thuộc giống và cách chế biến; nhiệt, sấy và bảo quản có thể làm thay đổi màu cũng như lượng hợp chất còn lại. Chưa thể khẳng định thành phẩm giữ nguyên toàn bộ anthocyanin nếu chưa kiểm nghiệm.'},
+      {keys:['cu hu dua','củ hủ dừa'], answer:'Củ hủ dừa là phần non bên trong ngọn cây dừa, giúp công thức có thêm nguyên liệu thực vật và dấu ấn địa phương. Vì nguyên liệu tươi chứa nước, cần sơ chế và sấy phù hợp khi làm bột. Hàm lượng chất xơ, khoáng chất và các chất dinh dưỡng trong bột cần được xác định bằng phân tích thực tế.'},
+      {keys:['chit sa','cu cai muoi','củ cải muối'], answer:'Củ cải muối Chịt Sa tạo nét hương vị địa phương cho bột mix Bến–Vĩnh–Trà. Hạn chế là có thể chứa nhiều natri do ướp muối; cần kiểm soát tỷ lệ phối trộn và kiểm nghiệm natri thành phẩm. Rửa hoặc sơ chế không bảo đảm loại bỏ hoàn toàn natri. Không nên quảng bá là nguồn lợi khuẩn nếu chưa xác minh quy trình lên men và vi sinh vật.'},
+      {keys:['ben vinh tra','bot mix','mix 3 vi','ba nguyen lieu'], answer:'Bột mix Bến–Vĩnh–Trà kết hợp bột thân ếch với khoai lang tím, củ hủ dừa và củ cải muối Chịt Sa nhằm tạo sự đa dạng về thành phần, màu sắc, hương vị và bản sắc vùng miền. Không thể tính chính xác dinh dưỡng của bột mix bằng cách cộng số liệu nguyên liệu riêng lẻ; cần biết tỷ lệ phối trộn, hao hụt chế biến và kết quả kiểm nghiệm thành phẩm.'},
+      {keys:['banh quy','bánh quy','cookie','bánh khoai'], answer:'Bánh quy FrogNutri là hướng nghiên cứu ứng dụng bột thân ếch cùng khoai lang tím, tinh bột và dầu ô liu. Bột thân ếch góp phần bổ sung protein; khoai lang tím tạo màu; bánh nhỏ dễ chia khẩu phần và có thể tạo hình đa dạng. Lượng protein thực tế phụ thuộc công thức. Nướng có thể làm thay đổi dinh dưỡng, màu sắc và kết cấu; cần đánh giá an toàn, thời hạn bảo quản và ghi rõ thành phần gây dị ứng.'},
+      {keys:['mat ong','phu mat ong','bánh rắc bột'], answer:'Phiên bản bánh quy phủ mật ong dùng một lớp mật ong mỏng để tạo vị ngọt, mùi thơm và giúp bột thân ếch bám trên bề mặt. Có thể điều chỉnh lượng mật ong và bột rắc để nghiên cứu độ cân bằng vị và kết cấu. Cần ghi rõ thành phần, đánh giá an toàn và lưu ý không cho trẻ dưới 12 tháng tuổi dùng mật ong.'},
+      {keys:['tinh canxi','tinh dinh duong','bao nhieu gram','gram bot','luong canxi','tinh toan'], answer:'Mình có thể giúp tính theo khối lượng nếu có số liệu kiểm nghiệm rõ ràng. Ví dụ, nếu dùng tạm con số báo cáo nêu là 5.676 mg canxi/100 g, phép tính số học tương ứng là 56,76 mg/g; lượng 5 g sẽ tương đương khoảng 283,8 mg và 10 g khoảng 567,6 mg. Đây chỉ là phép tính từ con số trong báo cáo, không phải xác nhận hàm lượng thực tế của mọi lô sản phẩm hay khuyến nghị liều dùng. Cần kiểm tra phiếu xét nghiệm gốc và hỏi chuyên gia y tế khi tính khẩu phần cho trẻ nhỏ hoặc người có bệnh lý.'},
+      {keys:['cach su dung','su dung the nao','an nhu the nao','pha bot','muong bot','5g','10g'], answer:'Theo báo cáo, có thể thêm bột vào cháo, súp hoặc canh đã nấu chín rồi khuấy đều; báo cáo cũng đề cập việc dùng như nguyên liệu nêm món ăn. Tài liệu nêu định lượng tham khảo 5 g cho trẻ em và 10 g cho người lớn, nhưng không nên xem đây là liều khuyến nghị y tế phù hợp cho tất cả mọi người. Với trẻ nhỏ, đặc biệt trẻ đang ăn dặm, cần xác minh độ tuổi phù hợp, nguy cơ dị ứng, độ an toàn và hướng dẫn từ chuyên gia y tế trước khi sử dụng.'},
+      {keys:['tre may thang','tre em','an dam','tre nho','em be','tre so sinh'], answer:'Tài liệu dự án có nhắc đến trẻ ở lứa tuổi ăn dặm nhưng không cung cấp đủ bằng chứng để xác định một độ tuổi bắt đầu dùng đã được xác nhận an toàn. Mình không nên tự đưa ra mốc tháng tuổi. Với trẻ nhỏ, hãy hỏi bác sĩ nhi khoa/chuyên gia dinh dưỡng và kiểm tra đầy đủ hồ sơ an toàn thực phẩm, thành phần, nguy cơ dị ứng và hướng dẫn trên nhãn trước khi dùng.'},
+      {keys:['nguoi gia','loang xuong','coi xuong','benh xuong','dieu tri','chua benh'], answer:'Dự án hướng đến việc tận dụng nguyên liệu có chứa protein và khoáng chất, trong đó báo cáo nhấn mạnh canxi. Tuy nhiên, không thể kết luận bột ếch phòng ngừa, điều trị còi xương hay loãng xương chỉ từ mô tả dự án hoặc một chỉ tiêu xét nghiệm. Người có bệnh lý xương cần được đánh giá bởi nhân viên y tế và không nên thay thế thuốc hoặc điều trị bằng sản phẩm này.'},
+      {keys:['bao quan','han su dung','de duoc bao lau','tu lanh','am moc'], answer:'Theo báo cáo, sản phẩm nên được đậy kín, để nơi khô ráo, thoáng mát, tránh nắng và độ ẩm cao; tài liệu nêu thời gian tham khảo khoảng 2 tháng ở điều kiện khô thoáng và khoảng 6 tháng khi bảo quản ngăn mát. Đây là thông tin trong báo cáo, không phải hạn dùng đã được xác nhận độc lập cho mọi lô. Hãy ưu tiên hạn sử dụng và hướng dẫn ghi trên bao bì thực tế; không dùng nếu có dấu hiệu ẩm mốc hoặc mùi lạ.'},
+      {keys:['kiem nghiem','vietlabs','an toan thuc pham','chung nhan','xet nghiem','khang sinh'], answer:'Báo cáo cho biết nhóm có các hồ sơ liên quan đến xét nghiệm thịt ếch, chỉ tiêu dinh dưỡng của bột thân/đùi ếch, kiểm nghiệm vi sinh và giấy tờ điều kiện an toàn thực phẩm. Mình không thể xác nhận nội dung hoặc hiệu lực của các chứng nhận chỉ từ lời mô tả. Để kiểm tra, hãy mở bản gốc, xem tên đơn vị, mã mẫu, ngày thử nghiệm, chỉ tiêu, kết quả và phạm vi áp dụng.'},
+      {keys:['gia ban','gia bao nhieu','mua o dau','dat hang','san pham nao'], answer:'Theo thông tin trên trang FrogNutri mà bạn cung cấp, bột ếch nguyên bản được giới thiệu ở mức 30.000đ/túi 40 g và bột ếch mix 3 vị ở mức 39.000đ/túi 40 g. Báo cáo nghiên cứu cũng có phần tính giá thành và giá bán dự kiến khác theo quy cách 100 g, nên giá có thể khác tùy phiên bản hoặc thời điểm. Hãy kiểm tra trang Sản phẩm hoặc kênh bán chính thức để biết giá đang áp dụng.'},
+      {keys:['khao sat','13 nguoi','92.3','61.5','phan hoi'], answer:'Theo báo cáo, nhóm khảo sát 13 người; nhóm tuổi 14–20 chiếm 61,5%, và 92,3% người tham gia đánh giá sản phẩm thơm hoặc rất thơm. Đây là kết quả khảo sát quy mô nhỏ được báo cáo, hữu ích để tham khảo phản hồi ban đầu nhưng chưa đủ để đại diện cho toàn bộ người tiêu dùng hoặc chứng minh hiệu quả sức khỏe.'},
+      {keys:['moi truong','o nhiem','phu pham','loi ich xa hoi'], answer:'Dự án hướng đến tận dụng phần thân ếch thường có giá trị thấp hơn, giảm lãng phí nguyên liệu và tăng giá trị kinh tế cho nguồn nguyên liệu địa phương. Báo cáo cũng nêu định hướng kinh tế tuần hoàn và ứng dụng nền tảng số để hỗ trợ tra cứu. Mức độ tác động môi trường thực tế cần được đánh giá bằng dữ liệu sản xuất và xử lý chất thải cụ thể.'},
+      {keys:['xin chao','chao ban','hello','hi','cam on','cảm ơn'], answer:'Xin chào bạn 🐸 Mình sẵn sàng hỗ trợ! Bạn có thể hỏi về dự án, nguyên liệu, quy trình, dinh dưỡng, kiểm nghiệm, cách sử dụng hoặc bảo quản bột ếch FrogNutri.'}
+    ];
+    function localAnswer(question){
+      const q=normalize(question);
+      // Estimate nutrients from the supplied laboratory values for the stated sample.
+      const grams=q.match(/(\d+(?:[.,]\d+)?)\s*(?:g|gram|grams)\b/);
+      if(grams){const g=Number(grams[1].replace(',','.'));if(Number.isFinite(g)&&g>=0&&g<=10000){const out=[];if(q.includes('protein')||q.includes('dam')||q.includes('chat dam'))out.push(`protein ≈ ${(g*0.574).toLocaleString('vi-VN',{maximumFractionDigits:3})} g`);if(q.includes('beo')||q.includes('lipid')||q.includes('fat'))out.push(`chất béo tổng ≈ ${(g*0.168).toLocaleString('vi-VN',{maximumFractionDigits:3})} g`);if(q.includes('canxi')||q.includes('calcium'))out.push(`canxi theo số liệu mẫu ≈ ${(g*56.76).toLocaleString('vi-VN',{maximumFractionDigits:2})} mg`);if(out.length)return `Với ${g} g bột thân ếch, phép tính theo số liệu mẫu được cung cấp cho kết quả: ${out.join('; ')}. Công thức: protein = gram × 0,574; chất béo = gram × 0,168; canxi = gram × 56,76 mg. Lưu ý: cần xác minh phiếu VietLabs gốc, đặc biệt con số canxi 5.676 mg/100 g rất cao; kết quả không đại diện mặc định cho mọi lô và không phải khuyến nghị liều dùng.`;}}
+      const hit=facts.find(item=>item.keys.some(k=>q.includes(normalize(k))));
+      if(hit)return hit.answer;
+      if(q.includes('bao nhieu')||q.includes('so lieu')||q.includes('ham luong'))return 'Mình chưa tìm thấy đủ số liệu định lượng cho chỉ tiêu bạn hỏi trong phần nội dung báo cáo hiện có. Báo cáo có nhắc đến các chỉ tiêu như protein, canxi, chất béo và độ ẩm; vui lòng xem phiếu kiểm nghiệm gốc hoặc gửi đúng chỉ tiêu/bảng kết quả để mình giải thích chính xác.';
+      return 'Mình chưa tìm thấy câu trả lời đủ chắc chắn trong thông tin dự án hiện có. Bạn có thể hỏi về: ý tưởng tận dụng thân ếch, nguyên liệu sả – gừng – vỏ quế, quy trình hấp/sấy/nghiền, chỉ tiêu kiểm nghiệm, cách dùng và bảo quản. Nếu câu hỏi liên quan đến điều trị bệnh hoặc liều dùng cho trẻ nhỏ, mình sẽ khuyên bạn xác minh với chuyên gia y tế thay vì tự suy đoán.';
+    }
+    async function askServer(question){
+      const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:question,context:'Bạn là FrogNutri AI, trả lời tiếng Việt ngắn gọn, xúc tích, dễ hiểu như trợ lý hội thoại. Dùng dữ liệu dự án: mẫu bột thân ếch được cung cấp có protein 57,4%, chất béo tổng 16,8%, canxi 5.676 mg/100 g; độ ẩm dưới 5% được nêu trong hồ sơ. Tính theo gram: protein g = gram bột × 0,574; chất béo g = gram bột × 0,168; canxi mg = gram bột × 56,76. Luôn nói đây là phép tính theo mẫu, không bảo đảm mọi lô; con số canxi rất cao cần xác minh phiếu VietLabs gốc. Bột thân ếch: người dị ứng ếch tránh dùng; không tuyên bố chữa bệnh, thay thế sữa hay đáp ứng toàn bộ dinh dưỡng. Khoai lang tím có tinh bột, chất xơ, anthocyanin; củ hủ dừa tạo đa dạng nguyên liệu, cần kiểm soát độ ẩm; củ cải muối Chịt Sa có thể nhiều natri, không tự khẳng định có lợi khuẩn. Bột mix không thể tính dinh dưỡng bằng cách cộng số liệu nguyên liệu đơn lẻ nếu thiếu tỷ lệ và kiểm nghiệm thành phẩm. Bánh quy khoai lang tím phối hợp bột thân ếch, tinh bột, dầu ô liu; mật ong tạo vị ngọt và giúp bột rắc bám, không dùng mật ong cho trẻ dưới 12 tháng. Dự án hướng tới tận dụng nguyên liệu và phát triển sản phẩm địa phương. Trả lời trực tiếp; nếu thiếu dữ liệu thì nói rõ, không bịa số liệu. Không khẳng định chữa bệnh hoặc khuyến nghị liều y tế.'})});
+      if(!response.ok)throw new Error('Chat API '+response.status);
+      const data=await response.json();return String(data.reply||data.output_text||data.message||'').trim();
+    }
+    function addBubble(text,who){const el=document.createElement('div');el.className='bubble '+who;el.textContent=text;body.appendChild(el);body.scrollTop=body.scrollHeight;return el;}
+    async function send(question){
+      const q=String(question||'').trim();if(!q||sending)return;if(!loggedIn()){updateAccess();document.querySelector('[data-open-auth="login"]')?.click();return;}
+      sending=true;sendButton.disabled=true;input.disabled=true;addBubble(q,'me');const waiting=addBubble('Đang tìm câu trả lời phù hợp… 🐸','bot');body.scrollTop=body.scrollHeight;
+      // Ưu tiên kho kiến thức dự án đã được nhóm cung cấp để câu trả lời nhất quán.
+      // Chỉ gọi API khi kho nội bộ chưa có câu trả lời phù hợp; nếu API lỗi thì giữ câu trả lời nội bộ.
+      const local=localAnswer(q);
+      const localNeedsHelp=local.startsWith('Mình chưa tìm thấy câu trả lời đủ chắc chắn');
+      try{
+        if(localNeedsHelp){const reply=await askServer(q);waiting.textContent=reply||local;}
+        else{waiting.textContent=local;}
+      }catch(error){console.warn('Chat API chưa sẵn sàng, dùng kho kiến thức FrogNutri:',error);waiting.textContent=local;}
+      sending=false;sendButton.disabled=false;input.disabled=false;input.focus();body.scrollTop=body.scrollHeight;
+    }
+    form?.addEventListener('submit',e=>{e.preventDefault();const q=input.value;input.value='';send(q);});
+    document.querySelectorAll('[data-q]').forEach(button=>button.addEventListener('click',()=>send(button.dataset.q)));
+  });
+  </script>
+</body>
+</html>

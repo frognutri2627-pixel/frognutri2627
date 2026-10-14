@@ -1,0 +1,6825 @@
+<!doctype html>
+
+<html lang="vi">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <meta
+
+    name="description"
+
+    content="Bột ếch nguyên bản, bột ếch mix ba vị và bánh quy phủ bột ếch của FrogNutri."
+
+  >
+
+
+
+  <title>Sản phẩm | FrogNutri</title>
+
+
+
+  <link
+
+    rel="icon"
+
+    href="assets/img/frognutri-logo.jpg"
+
+  >
+
+
+
+  <style>
+
+    /* =========================================================
+
+       FROGNUTRI
+
+       PRODUCT PAGE
+
+       HTML + CSS + JS TRONG 1 FILE
+
+       ========================================================= */
+
+
+
+    :root {
+
+      --green: #2f9b63;
+
+      --green-dark: #176c45;
+
+      --green-deep: #103e2a;
+
+      --green-menu: #1f6d45;
+
+
+
+      --mint: #e9f8f0;
+
+      --mint-dark: #d8f1e3;
+
+
+
+      --ink: #16382b;
+
+      --text: #34483d;
+
+      --muted: #667970;
+
+
+
+      --white: #ffffff;
+
+      --cream: #fbfefc;
+
+
+
+      --line: #dbeae2;
+
+
+
+      --orange: #e85b32;
+
+      --pink: #e67a9d;
+
+
+
+      --shadow-sm:
+
+        0 8px 24px rgba(23, 76, 52, 0.07);
+
+
+
+      --shadow:
+
+        0 18px 55px rgba(23, 76, 52, 0.11);
+
+
+
+      --radius: 22px;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       RESET
+
+       ========================================================= */
+
+
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+    }
+
+
+
+    html {
+
+      scroll-behavior: smooth;
+
+    }
+
+
+
+    body {
+
+      font-family:
+
+        Inter,
+
+        Arial,
+
+        Helvetica,
+
+        sans-serif;
+
+
+
+      color: var(--ink);
+
+
+
+      background:
+
+        linear-gradient(
+
+          180deg,
+
+          #fbfefc 0%,
+
+          #f7fcf9 100%
+
+        );
+
+
+
+      line-height: 1.65;
+
+    }
+
+
+
+    body.cart-open {
+
+      overflow: hidden;
+
+    }
+
+
+
+    a {
+
+      color: inherit;
+
+      text-decoration: none;
+
+    }
+
+
+
+    button,
+
+    input,
+
+    textarea,
+
+    select {
+
+      font: inherit;
+
+    }
+
+
+
+    button {
+
+      cursor: pointer;
+
+    }
+
+
+
+    img {
+
+      display: block;
+
+      max-width: 100%;
+
+    }
+
+
+
+    ::selection {
+
+      background: #bfe9d0;
+
+      color: var(--green-deep);
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       CONTAINER
+
+       ========================================================= */
+
+
+
+    .container {
+
+      width: min(
+
+        1160px,
+
+        calc(100% - 36px)
+
+      );
+
+
+
+      margin: 0 auto;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       TOPBAR
+
+       ========================================================= */
+
+
+
+    .topbar {
+
+      background:
+
+        linear-gradient(
+
+          90deg,
+
+          #103e2a,
+
+          #1d6946,
+
+          #103e2a
+
+        );
+
+
+
+      color: #eaf8f0;
+
+
+
+      font-size: 13px;
+
+
+
+      box-shadow:
+
+        0 2px 15px rgba(15, 77, 52, 0.12);
+
+    }
+
+
+
+    .topbar .container {
+
+      min-height: 38px;
+
+
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+
+
+      gap: 20px;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       NAVIGATION
+
+       ========================================================= */
+
+
+
+    .nav {
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 1000;
+
+
+
+      background:
+
+        rgba(255, 255, 255, 0.96);
+
+
+
+      border-bottom:
+
+        1px solid var(--line);
+
+
+
+      backdrop-filter:
+
+        blur(14px);
+
+
+
+      box-shadow:
+
+        0 8px 28px rgba(25, 76, 53, 0.05);
+
+    }
+
+
+
+    .nav-inner {
+
+      min-height: 82px;
+
+
+
+      display: flex;
+
+      align-items: center;
+
+
+
+      gap: 22px;
+
+    }
+
+
+
+
+
+    /* LOGO */
+
+
+
+    .brand {
+
+      display: flex;
+
+      align-items: center;
+
+
+
+      gap: 11px;
+
+
+
+      min-width: max-content;
+
+    }
+
+
+
+    .brand img {
+
+      width: 48px;
+
+      height: 48px;
+
+
+
+      border-radius: 14px;
+
+
+
+      object-fit: cover;
+
+
+
+      box-shadow:
+
+        0 5px 18px rgba(35, 132, 82, 0.16);
+
+
+
+      transition:
+
+        transform 0.3s ease;
+
+    }
+
+
+
+    .brand:hover img {
+
+      transform:
+
+        rotate(-4deg)
+
+        scale(1.04);
+
+    }
+
+
+
+    .brand strong {
+
+      display: block;
+
+
+
+      color: var(--green-dark);
+
+
+
+      font-size: 19px;
+
+      line-height: 1.2;
+
+    }
+
+
+
+    .brand small {
+
+      display: block;
+
+
+
+      margin-top: 2px;
+
+
+
+      color: var(--muted);
+
+
+
+      font-size: 11px;
+
+      line-height: 1.3;
+
+    }
+
+
+
+
+
+    /* MENU */
+
+
+
+    .links {
+
+      flex: 1;
+
+
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: flex-end;
+
+
+
+      gap: 4px;
+
+    }
+
+
+
+    .links a {
+
+      padding: 9px 10px;
+
+
+
+      border-radius: 10px;
+
+
+
+      color: #3f5147;
+
+
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+
+
+      white-space: nowrap;
+
+
+
+      transition:
+
+        background 0.2s ease,
+
+        color 0.2s ease,
+
+        transform 0.2s ease;
+
+    }
+
+
+
+    .links a:hover,
+
+    .links a.active {
+
+      color: var(--green-dark);
+
+
+
+      background:
+
+        var(--mint);
+
+
+
+      transform:
+
+        translateY(-1px);
+
+    }
+
+
+
+
+
+    /* CART MENU */
+
+
+
+    .cart-link {
+
+      display: inline-flex;
+
+
+
+      align-items: center;
+
+      gap: 4px;
+
+
+
+      font-weight: 800 !important;
+
+    }
+
+
+
+    #cart-count {
+
+      min-width: 21px;
+
+      height: 21px;
+
+
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+
+
+      padding: 0 5px;
+
+
+
+      border-radius: 999px;
+
+
+
+      background:
+
+        var(--orange);
+
+
+
+      color: #fff;
+
+
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+
+
+      transition:
+
+        transform 0.2s ease;
+
+    }
+
+
+
+    #cart-count.bump {
+
+      animation:
+
+        cartBump 0.35s ease;
+
+    }
+
+
+
+    @keyframes cartBump {
+
+      0% {
+
+        transform: scale(1);
+
+      }
+
+
+
+      45% {
+
+        transform: scale(1.35);
+
+      }
+
+
+
+      100% {
+
+        transform: scale(1);
+
+      }
+
+    }
+
+
+
+
+
+    /* MOBILE BUTTON */
+
+
+
+    .mobile-toggle {
+
+      display: none;
+
+
+
+      width: 44px;
+
+      height: 44px;
+
+
+
+      border: 0;
+
+
+
+      border-radius: 12px;
+
+
+
+      background:
+
+        var(--mint);
+
+
+
+      color:
+
+        var(--green-dark);
+
+
+
+      font-size: 22px;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       HERO
+
+       ========================================================= */
+
+
+
+    .page-hero {
+
+      position: relative;
+
+
+
+      overflow: hidden;
+
+
+
+      padding: 75px 0 65px;
+
+
+
+      background:
+
+        radial-gradient(
+
+          circle at 88% 15%,
+
+          #d8f1e3 0,
+
+          transparent 31%
+
+        ),
+
+
+
+        radial-gradient(
+
+          circle at 10% 100%,
+
+          #f1e6f1 0,
+
+          transparent 24%
+
+        ),
+
+
+
+        linear-gradient(
+
+          135deg,
+
+          #f2faf5,
+
+          #ffffff
+
+        );
+
+    }
+
+
+
+    .page-hero::after {
+
+      content: "";
+
+
+
+      position: absolute;
+
+
+
+      width: 260px;
+
+      height: 260px;
+
+
+
+      right: -120px;
+
+      bottom: -150px;
+
+
+
+      border-radius: 50%;
+
+
+
+      background:
+
+        rgba(47, 155, 99, 0.07);
+
+    }
+
+
+
+    .hero-content {
+
+      position: relative;
+
+      z-index: 1;
+
+    }
+
+
+
+    .eyebrow {
+
+      display: inline-block;
+
+
+
+      margin-bottom: 10px;
+
+
+
+      padding: 5px 11px;
+
+
+
+      border:
+
+        1px solid #d4eddf;
+
+
+
+      border-radius: 999px;
+
+
+
+      background:
+
+        var(--mint);
+
+
+
+      color:
+
+        var(--green-dark);
+
+
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+
+
+      letter-spacing: 0.04em;
+
+    }
+
+
+
+    .page-hero h1 {
+
+      max-width: 760px;
+
+
+
+      margin-bottom: 15px;
+
+
+
+      color:
+
+        var(--green-deep);
+
+
+
+      font-size:
+
+        clamp(38px, 6vw, 62px);
+
+
+
+      line-height: 1.03;
+
+
+
+      letter-spacing: -0.04em;
+
+    }
+
+
+
+    .lead {
+
+      max-width: 760px;
+
+
+
+      color:
+
+        var(--muted);
+
+
+
+      font-size: 17px;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       SECTION
+
+       ========================================================= */
+
+
+
+    .section {
+
+      padding: 72px 0;
+
+    }
+
+
+
+    .section.alt {
+
+      background:
+
+        #f0f9f4;
+
+    }
+
+
+
+    .section-head {
+
+      display: flex;
+
+
+
+      align-items: flex-end;
+
+      justify-content: space-between;
+
+
+
+      gap: 25px;
+
+
+
+      margin-bottom: 30px;
+
+    }
+
+
+
+    .section-head h2,
+
+    .section h2 {
+
+      color:
+
+        var(--green-deep);
+
+
+
+      font-size:
+
+        clamp(28px, 4vw, 40px);
+
+
+
+      line-height: 1.15;
+
+
+
+      letter-spacing: -0.025em;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       BUTTON
+
+       ========================================================= */
+
+
+
+    .btn {
+
+      min-height: 45px;
+
+
+
+      display: inline-flex;
+
+
+
+      align-items: center;
+
+      justify-content: center;
+
+
+
+      gap: 7px;
+
+
+
+      padding: 11px 18px;
+
+
+
+      border: 0;
+
+
+
+      border-radius: 13px;
+
+
+
+      font-size: 14px;
+
+      font-weight: 900;
+
+
+
+      transition:
+
+        transform 0.2s ease,
+
+        box-shadow 0.2s ease,
+
+        background 0.2s ease;
+
+    }
+
+
+
+    .btn:hover {
+
+      transform:
+
+        translateY(-2px);
+
+    }
+
+
+
+    .btn.primary {
+
+      color: #fff;
+
+
+
+      background:
+
+        linear-gradient(
+
+          135deg,
+
+          #2f9b63,
+
+          #20794c
+
+        );
+
+
+
+      box-shadow:
+
+        0 8px 20px
+
+        rgba(38, 137, 86, 0.18);
+
+    }
+
+
+
+    .btn.primary:hover {
+
+      box-shadow:
+
+        0 13px 28px
+
+        rgba(38, 137, 86, 0.25);
+
+    }
+
+
+
+    .btn.secondary {
+
+      color:
+
+        var(--green-dark);
+
+
+
+      background:
+
+        var(--mint);
+
+
+
+      border:
+
+        1px solid #d4eddf;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       PRODUCT GRID
+
+       ========================================================= */
+
+
+
+    .product-cards {
+
+      display: grid;
+
+
+
+      grid-template-columns:
+
+        repeat(3, minmax(0, 1fr));
+
+
+
+      gap: 22px;
+
+    }
+
+
+
+    .product-card {
+
+      position: relative;
+
+
+
+      overflow: hidden;
+
+
+
+      display: flex;
+
+      flex-direction: column;
+
+
+
+      background:
+
+        #fff;
+
+
+
+      border:
+
+        1px solid var(--line);
+
+
+
+      border-radius:
+
+        var(--radius);
+
+
+
+      box-shadow:
+
+        var(--shadow-sm);
+
+
+
+      transition:
+
+        transform 0.25s ease,
+
+        box-shadow 0.25s ease,
+
+        border-color 0.25s ease;
+
+    }
+
+
+
+    .product-card::before {
+
+      content: "";
+
+
+
+      position: absolute;
+
+
+
+      left: 0;
+
+      right: 0;
+
+      top: 0;
+
+
+
+      height: 4px;
+
+
+
+      background:
+
+        linear-gradient(
+
+          90deg,
+
+          #35a96b,
+
+          #8bd2a9
+
+        );
+
+
+
+      opacity: 0;
+
+
+
+      transition:
+
+        opacity 0.25s ease;
+
+
+
+      z-index: 2;
+
+    }
+
+
+
+    .product-card:hover {
+
+      transform:
+
+        translateY(-5px);
+
+
+
+      box-shadow:
+
+        var(--shadow);
+
+
+
+      border-color:
+
+        #c9e5d5;
+
+    }
+
+
+
+    .product-card:hover::before {
+
+      opacity: 1;
+
+    }
+
+
+
+
+
+    /* PRODUCT IMAGE */
+
+
+
+    .product-image {
+
+      width: 100%;
+
+      height: 350px;
+
+
+
+      overflow: hidden;
+
+
+
+      background:
+
+        #eef8f2;
+
+    }
+
+
+
+    .product-image img {
+
+      width: 100%;
+
+      height: 100%;
+
+
+
+      object-fit: cover;
+
+
+
+      transition:
+
+        transform 0.4s ease;
+
+    }
+
+
+
+    .product-card:hover
+
+    .product-image img {
+
+      transform:
+
+        scale(1.035);
+
+    }
+
+
+
+
+
+    /* PRODUCT CONTENT */
+
+
+
+    .product-card-content {
+
+      flex: 1;
+
+
+
+      display: flex;
+
+      flex-direction: column;
+
+
+
+      padding: 25px;
+
+    }
+
+
+
+    .product-card h3 {
+
+      margin-bottom: 10px;
+
+
+
+      color:
+
+        var(--green-deep);
+
+
+
+      font-size: 25px;
+
+
+
+      line-height: 1.2;
+
+    }
+
+
+
+    .product-card p {
+
+      margin-bottom: 10px;
+
+
+
+      color:
+
+        var(--muted);
+
+
+
+      font-size: 15px;
+
+    }
+
+
+
+    .product-price {
+
+      margin-top: auto !important;
+
+
+
+      padding-top: 14px;
+
+
+
+      color:
+
+        var(--green-dark) !important;
+
+
+
+      font-size: 19px !important;
+
+    }
+
+
+
+    .add-to-cart {
+
+      width: 100%;
+
+
+
+      margin-top: 9px;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       LAB / STATS
+
+       ========================================================= */
+
+
+
+    .split {
+
+      display: grid;
+
+
+
+      grid-template-columns:
+
+        1.05fr 0.95fr;
+
+
+
+      gap: 45px;
+
+
+
+      align-items: center;
+
+    }
+
+
+
+    .split p {
+
+      margin-top: 15px;
+
+
+
+      color:
+
+        var(--muted);
+
+    }
+
+
+
+    .stats {
+
+      display: grid;
+
+
+
+      grid-template-columns:
+
+        repeat(2, 1fr);
+
+
+
+      gap: 14px;
+
+    }
+
+
+
+    .stat {
+
+      padding: 23px;
+
+
+
+      text-align: center;
+
+
+
+      background:
+
+        #fff;
+
+
+
+      border:
+
+        1px solid var(--line);
+
+
+
+      border-radius:
+
+        18px;
+
+
+
+      box-shadow:
+
+        var(--shadow-sm);
+
+
+
+      transition:
+
+        transform 0.2s ease,
+
+        box-shadow 0.2s ease;
+
+    }
+
+
+
+    .stat:hover {
+
+      transform:
+
+        translateY(-4px);
+
+
+
+      box-shadow:
+
+        var(--shadow);
+
+    }
+
+
+
+    .stat strong {
+
+      color:
+
+        var(--green-dark);
+
+
+
+      font-size: 27px;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       DOCUMENTS
+
+       ========================================================= */
+
+
+
+    .document-library {
+
+      padding: 30px;
+
+
+
+      background:
+
+        linear-gradient(
+
+          135deg,
+
+          #effaf4,
+
+          #fff
+
+        );
+
+
+
+      border:
+
+        1px solid #d5ecdf;
+
+
+
+      border-radius:
+
+        26px;
+
+
+
+      box-shadow:
+
+        var(--shadow-sm);
+
+    }
+
+
+
+    .document-head {
+
+      display: flex;
+
+
+
+      justify-content: space-between;
+
+      align-items: flex-end;
+
+
+
+      gap: 25px;
+
+
+
+      margin-bottom: 24px;
+
+    }
+
+
+
+    .document-head h2 {
+
+      margin-top: 5px;
+
+
+
+      color:
+
+        var(--green-deep);
+
+
+
+      font-size:
+
+        clamp(26px, 4vw, 37px);
+
+    }
+
+
+
+    .document-head p {
+
+      max-width: 500px;
+
+
+
+      color:
+
+        var(--muted);
+
+    }
+
+
+
+    .document-grid {
+
+      display: grid;
+
+
+
+      grid-template-columns:
+
+        repeat(2, 1fr);
+
+
+
+      gap: 14px;
+
+    }
+
+
+
+    .document-card {
+
+      display: flex;
+
+      align-items: center;
+
+
+
+      gap: 14px;
+
+
+
+      padding: 17px;
+
+
+
+      background:
+
+        rgba(255,255,255,.88);
+
+
+
+      border:
+
+        1px solid var(--line);
+
+
+
+      border-radius:
+
+        17px;
+
+
+
+      transition:
+
+        transform 0.2s ease,
+
+        box-shadow 0.2s ease,
+
+        border-color 0.2s ease;
+
+    }
+
+
+
+    .document-card:hover {
+
+      transform:
+
+        translateY(-3px);
+
+
+
+      border-color:
+
+        #9dceb1;
+
+
+
+      box-shadow:
+
+        var(--shadow-sm);
+
+    }
+
+
+
+    .document-icon {
+
+      flex:
+
+        0 0 48px;
+
+
+
+      width: 48px;
+
+      height: 55px;
+
+
+
+      display: grid;
+
+      place-items: center;
+
+
+
+      border-radius:
+
+        12px;
+
+
+
+      background:
+
+        linear-gradient(
+
+          160deg,
+
+          #fff,
+
+          #e8f7ee
+
+        );
+
+
+
+      border:
+
+        1px solid #cfe5d8;
+
+
+
+      font-size: 23px;
+
+    }
+
+
+
+    .document-card h3 {
+
+      margin-bottom: 3px;
+
+
+
+      color:
+
+        var(--green-deep);
+
+
+
+      font-size: 14px;
+
+    }
+
+
+
+    .document-card p {
+
+      color:
+
+        var(--muted);
+
+
+
+      font-size: 12px;
+
+    }
+
+
+
+    .doc-action {
+
+      display: inline-block;
+
+
+
+      margin-top: 5px;
+
+
+
+      color:
+
+        var(--green-dark);
+
+
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       CART OVERLAY
+
+       ========================================================= */
+
+
+
+    .cart-overlay {
+
+      position: fixed;
+
+
+
+      inset: 0;
+
+
+
+      z-index: 2000;
+
+
+
+      background:
+
+        rgba(12, 35, 25, 0.48);
+
+
+
+      opacity: 0;
+
+
+
+      visibility: hidden;
+
+
+
+      transition:
+
+        opacity 0.25s ease,
+
+        visibility 0.25s ease;
+
+    }
+
+
+
+    .cart-overlay.show {
+
+      opacity: 1;
+
+      visibility: visible;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       CART PANEL
+
+       ========================================================= */
+
+
+
+    .cart-panel {
+
+      position: absolute;
+
+
+
+      top: 0;
+
+      right: 0;
+
+
+
+      width:
+
+        min(440px, 100%);
+
+
+
+      height: 100%;
+
+
+
+      display: flex;
+
+      flex-direction: column;
+
+
+
+      background:
+
+        #fff;
+
+
+
+      box-shadow:
+
+        -20px 0 55px
+
+        rgba(0,0,0,.17);
+
+
+
+      transform:
+
+        translateX(100%);
+
+
+
+      transition:
+
+        transform 0.3s ease;
+
+    }
+
+
+
+    .cart-overlay.show
+
+    .cart-panel {
+
+      transform:
+
+        translateX(0);
+
+    }
+
+
+
+
+
+    /* CART HEADER */
+
+
+
+    .cart-header {
+
+      display: flex;
+
+
+
+      align-items: center;
+
+      justify-content: space-between;
+
+
+
+      padding: 21px;
+
+
+
+      border-bottom:
+
+        1px solid var(--line);
+
+
+
+      background:
+
+        linear-gradient(
+
+          135deg,
+
+          #f1faf5,
+
+          #fff
+
+        );
+
+    }
+
+
+
+    .cart-header h2 {
+
+      color:
+
+        var(--green-deep);
+
+
+
+      font-size: 21px;
+
+    }
+
+
+
+    .cart-close {
+
+      width: 38px;
+
+      height: 38px;
+
+
+
+      border: 0;
+
+
+
+      border-radius: 11px;
+
+
+
+      background:
+
+        var(--mint);
+
+
+
+      color:
+
+        var(--green-dark);
+
+
+
+      font-size: 25px;
+
+    }
+
+
+
+    .cart-close:hover {
+
+      background:
+
+        var(--mint-dark);
+
+    }
+
+
+
+
+
+    /* CART ITEMS */
+
+
+
+    .cart-items {
+
+      flex: 1;
+
+
+
+      overflow-y: auto;
+
+
+
+      padding: 18px;
+
+    }
+
+
+
+    .empty-cart {
+
+      padding:
+
+        60px 20px;
+
+
+
+      text-align: center;
+
+
+
+      color:
+
+        var(--muted);
+
+    }
+
+
+
+    .empty-cart-icon {
+
+      margin-bottom: 10px;
+
+
+
+      font-size: 48px;
+
+    }
+
+
+
+    .empty-cart h3 {
+
+      color:
+
+        var(--green-deep);
+
+
+
+      margin-bottom: 5px;
+
+    }
+
+
+
+
+
+    /* ITEM */
+
+
+
+    .cart-item {
+
+      display: grid;
+
+
+
+      grid-template-columns:
+
+        68px 1fr auto;
+
+
+
+      gap: 12px;
+
+
+
+      align-items: center;
+
+
+
+      padding: 14px 0;
+
+
+
+      border-bottom:
+
+        1px solid #edf3ef;
+
+    }
+
+
+
+    .cart-item-image {
+
+      width: 68px;
+
+      height: 68px;
+
+
+
+      overflow: hidden;
+
+
+
+      border-radius: 13px;
+
+
+
+      background:
+
+        var(--mint);
+
+    }
+
+
+
+    .cart-item-image img {
+
+      width: 100%;
+
+      height: 100%;
+
+
+
+      object-fit: cover;
+
+    }
+
+
+
+    .cart-item h4 {
+
+      margin-bottom: 3px;
+
+
+
+      color:
+
+        var(--green-deep);
+
+
+
+      font-size: 14px;
+
+    }
+
+
+
+    .cart-item-price {
+
+      color:
+
+        var(--green-dark);
+
+
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+    }
+
+
+
+
+
+    /* QUANTITY */
+
+
+
+    .quantity-control {
+
+      display: flex;
+
+
+
+      align-items: center;
+
+
+
+      gap: 7px;
+
+
+
+      margin-top: 7px;
+
+    }
+
+
+
+    .quantity-control button {
+
+      width: 28px;
+
+      height: 28px;
+
+
+
+      border:
+
+        1px solid #cfe2d7;
+
+
+
+      border-radius: 8px;
+
+
+
+      background:
+
+        #f6fbf8;
+
+
+
+      color:
+
+        var(--green-dark);
+
+
+
+      font-weight: 900;
+
+    }
+
+
+
+    .quantity-control button:hover {
+
+      background:
+
+        var(--mint);
+
+
+
+      border-color:
+
+        #9dceb1;
+
+    }
+
+
+
+    .quantity-control span {
+
+      min-width: 18px;
+
+
+
+      text-align: center;
+
+
+
+      font-size: 13px;
+
+      font-weight: 900;
+
+    }
+
+
+
+    .remove-item {
+
+      border: 0;
+
+
+
+      background:
+
+        transparent;
+
+
+
+      color:
+
+        #bd5540;
+
+
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+    }
+
+
+
+    .remove-item:hover {
+
+      color:
+
+        #8d2e1d;
+
+    }
+
+
+
+
+
+    /* CART FOOTER */
+
+
+
+    .cart-footer {
+
+      padding: 19px;
+
+
+
+      border-top:
+
+        1px solid var(--line);
+
+
+
+      background:
+
+        #f8fcfa;
+
+    }
+
+
+
+    .cart-total {
+
+      display: flex;
+
+
+
+      align-items: center;
+
+      justify-content: space-between;
+
+
+
+      margin-bottom: 14px;
+
+    }
+
+
+
+    .cart-total strong {
+
+      color:
+
+        var(--green-dark);
+
+
+
+      font-size: 22px;
+
+    }
+
+
+
+    .checkout-btn {
+
+      width: 100%;
+
+    }
+
+
+
+    .clear-cart {
+
+      width: 100%;
+
+
+
+      margin-top: 8px;
+
+
+
+      padding: 8px;
+
+
+
+      border: 0;
+
+
+
+      background:
+
+        transparent;
+
+
+
+      color:
+
+        #a24c3c;
+
+
+
+      font-size: 12px;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       TOAST
+
+       ========================================================= */
+
+
+
+    .toast {
+
+      position: fixed;
+
+
+
+      right: 20px;
+
+      bottom: 20px;
+
+
+
+      z-index: 3000;
+
+
+
+      max-width: 350px;
+
+
+
+      padding: 13px 17px;
+
+
+
+      border-radius: 13px;
+
+
+
+      background:
+
+        var(--green-deep);
+
+
+
+      color:
+
+        #fff;
+
+
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+
+
+      box-shadow:
+
+        0 12px 35px rgba(0,0,0,.2);
+
+
+
+      opacity: 0;
+
+
+
+      transform:
+
+        translateY(15px);
+
+
+
+      pointer-events: none;
+
+
+
+      transition:
+
+        0.25s ease;
+
+    }
+
+
+
+    .toast.show {
+
+      opacity: 1;
+
+
+
+      transform:
+
+        translateY(0);
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       FOOTER
+
+       ========================================================= */
+
+
+
+    .footer {
+
+      position: relative;
+
+
+
+      overflow: hidden;
+
+
+
+      padding: 50px 0;
+
+
+
+      color:
+
+        #d8e9df;
+
+
+
+      background:
+
+        radial-gradient(
+
+          circle at 80% 20%,
+
+          rgba(83,171,116,.20),
+
+          transparent 30%
+
+        ),
+
+
+
+        linear-gradient(
+
+          135deg,
+
+          #103e2a,
+
+          #173d2a
+
+        );
+
+    }
+
+
+
+    .footer::after {
+
+      content: "🐸";
+
+
+
+      position: absolute;
+
+
+
+      right: 5%;
+
+      bottom: -35px;
+
+
+
+      font-size: 130px;
+
+
+
+      opacity: .045;
+
+
+
+      pointer-events: none;
+
+    }
+
+
+
+    .footer-grid {
+
+      display: grid;
+
+
+
+      grid-template-columns:
+
+        2fr 1fr 1fr;
+
+
+
+      gap: 35px;
+
+    }
+
+
+
+    .footer h3 {
+
+      margin-bottom: 8px;
+
+
+
+      color:
+
+        #fff;
+
+    }
+
+
+
+    .footer b {
+
+      color:
+
+        #fff;
+
+    }
+
+
+
+    .footer p {
+
+      margin-top: 8px;
+
+
+
+      color:
+
+        #c3d8cc;
+
+
+
+      font-size: 13px;
+
+    }
+
+
+
+    .footer a:hover {
+
+      color:
+
+        #fff;
+
+    }
+
+
+
+
+
+    /* =========================================================
+
+       RESPONSIVE
+
+       ========================================================= */
+
+
+
+    @media (max-width: 1050px) {
+
+      .product-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+
+
+
+      .links a {
+
+        padding:
+
+          8px 7px;
+
+
+
+        font-size: 12px;
+
+      }
+
+
+
+      .document-grid {
+
+        grid-template-columns:
+
+          repeat(2, 1fr);
+
+      }
+
+
+
+    }
+
+
+
+
+
+    @media (max-width: 900px) {
+
+
+
+      .mobile-toggle {
+
+        display: block;
+
+
+
+        margin-left: auto;
+
+      }
+
+
+
+      .links {
+
+        display: none;
+
+
+
+        position: absolute;
+
+
+
+        left: 18px;
+
+        right: 18px;
+
+        top: 76px;
+
+
+
+        padding: 10px;
+
+
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+
+
+        background:
+
+          #fff;
+
+
+
+        border:
+
+          1px solid var(--line);
+
+
+
+        border-radius:
+
+          17px;
+
+
+
+        box-shadow:
+
+          var(--shadow);
+
+      }
+
+
+
+      .links.show {
+
+        display: flex;
+
+      }
+
+
+
+      .links a {
+
+        width: 100%;
+
+
+
+        padding:
+
+          11px 12px;
+
+
+
+        text-align:
+
+          left;
+
+      }
+
+
+
+      .split {
+
+        grid-template-columns:
+
+          1fr;
+
+      }
+
+
+
+    }
+
+
+
+
+
+    @media (max-width: 700px) {
+
+
+
+      .container {
+
+        width:
+
+          min(
+
+            100% - 24px,
+
+            1160px
+
+          );
+
+      }
+
+
+
+      .topbar .container {
+
+        min-height:
+
+          auto;
+
+
+
+        padding:
+
+          7px 0;
+
+
+
+        flex-direction:
+
+          column;
+
+
+
+        align-items:
+
+          flex-start;
+
+
+
+        gap: 2px;
+
+      }
+
+
+
+      .topbar .container span:last-child {
+
+        display: none;
+
+      }
+
+
+
+      .brand small {
+
+        display: none;
+
+      }
+
+
+
+      .page-hero {
+
+        padding:
+
+          55px 0 48px;
+
+      }
+
+
+
+      .section {
+
+        padding:
+
+          52px 0;
+
+      }
+
+
+
+      .section-head {
+
+        display: block;
+
+      }
+
+
+
+      .section-head .btn {
+
+        margin-top: 14px;
+
+      }
+
+
+
+      .product-cards {
+
+        grid-template-columns:
+
+          1fr;
+
+      }
+
+
+
+      .product-image {
+
+        height:
+
+          285px;
+
+      }
+
+
+
+      .product-card-content {
+
+        padding:
+
+          21px;
+
+      }
+
+
+
+      .stats {
+
+        grid-template-columns:
+
+          repeat(2, 1fr);
+
+      }
+
+
+
+      .stat {
+
+        padding:
+
+          18px 10px;
+
+      }
+
+
+
+      .stat strong {
+
+        font-size:
+
+          23px;
+
+      }
+
+
+
+      .document-library {
+
+        padding:
+
+          20px;
+
+      }
+
+
+
+      .document-head {
+
+        display:
+
+          block;
+
+      }
+
+
+
+      .document-grid {
+
+        grid-template-columns:
+
+          1fr;
+
+      }
+
+
+
+      .footer-grid {
+
+        grid-template-columns:
+
+          1fr;
+
+
+
+        gap:
+
+          24px;
+
+      }
+
+
+
+      .toast {
+
+        left:
+
+          12px;
+
+
+
+        right:
+
+          12px;
+
+
+
+        bottom:
+
+          12px;
+
+
+
+        max-width:
+
+          none;
+
+      }
+
+
+
+    }
+
+
+
+
+
+    @media (max-width: 430px) {
+
+
+
+      .stats {
+
+        grid-template-columns:
+
+          1fr;
+
+      }
+
+
+
+      .cart-item {
+
+        grid-template-columns:
+
+          58px 1fr;
+
+      }
+
+
+
+      .cart-item-image {
+
+        width:
+
+          58px;
+
+
+
+        height:
+
+          58px;
+
+      }
+
+
+
+      .remove-item {
+
+        grid-column:
+
+          2;
+
+
+
+        justify-self:
+
+          start;
+
+      }
+
+
+
+    }
+
+
+
+  </style>
+
+
+
+<style>
+
+/* FrogNutri shared navigation polish */
+
+.links{align-items:center;gap:clamp(8px,1vw,16px)}
+
+/* Social buttons: override product page's generic .links a rules to match index.html. */
+.links a.social-nav{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border:1px solid #dcebe3;border-radius:999px;background:#fff;color:#245b43;font-size:13px;font-weight:750;text-decoration:none;white-space:nowrap;line-height:1.3;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.links a.social-nav:hover{transform:translateY(-2px);box-shadow:0 6px 18px #164e351a;background:#f2fbf5}
+.links a.social-nav svg{display:block;width:18px;height:18px;fill:currentColor;flex:none}
+.links a.social-nav.tiktok-nav{background:#17221d;color:#fff;border-color:#17221d}
+.links a.social-nav.tiktok-nav:hover{background:#304b3e;color:#fff}
+.links a.social-nav.facebook-nav{color:#1766d1}
+@media(max-width:980px){.links a.social-nav{width:100%;justify-content:flex-start;border-radius:12px;padding:11px 13px}}
+
+/* Cart UI is intentionally removed; purchase checkout happens on TikTok Shop. */
+
+#cartOverlay,#cartDrawer,.cart-drawer,.cart-link,[data-cart-count],#openCartTop{display:none!important}
+
+.auth-panel{box-shadow:0 18px 55px rgba(32,83,57,.08)}
+
+</style>
+
+<style>#cartOverlay,.cart-panel,.cart-items,.cart-footer,#cartItems,#checkoutBtn,#clearCart{display:none!important}.add-to-cart{cursor:pointer}</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+
+<script>window.FN_SUPABASE_URL ||= 'https://aoqshriypbwkadprzxgy.supabase.co';window.FN_SUPABASE_PUBLISHABLE_KEY ||= 'sb_publishable_5dpQ-GK4H4YSyUfcZ1b63A_YlLrsnnU';window.FN_SUPABASE_READY=true;document.documentElement.classList.add('fn-auth-check');</script>
+
+</head>
+
+
+
+
+
+<body>
+
+
+
+
+
+  <!-- =======================================================
+
+       TOPBAR
+
+       ======================================================= -->
+
+
+
+  <div class="topbar">
+
+
+
+    <div class="container">
+
+
+
+      <span>
+
+        🐸 FrogNutri • Từ giá trị bỏ quên đến dinh dưỡng tiện lợi
+
+      </span>
+
+
+
+      <span>
+
+        🌱 Phiên bản phát triển 2026–2027
+
+      </span>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+
+
+  <!-- =======================================================
+
+       NAVIGATION
+
+       ======================================================= -->
+
+
+
+  <nav class="nav">
+
+
+
+    <div class="container nav-inner">
+
+
+
+      <a
+
+        class="brand"
+
+        href="index.html"
+
+      >
+
+
+
+        <img
+
+          src="assets/img/frognutri-logo.jpg"
+
+          alt="FrogNutri"
+
+
+        >
+
+
+
+        <div>
+
+
+
+          <strong>
+
+            FrogNutri
+
+          </strong>
+
+
+
+          <small>
+
+            Từ giá trị bỏ quên đến dinh dưỡng tiện lợi.
+
+          </small>
+
+
+
+        </div>
+
+
+
+      </a>
+
+
+
+
+
+      <button
+        class="mobile-toggle"
+        id="mobileToggle"
+        data-mobile
+        type="button"
+        aria-label="Mở menu"
+        aria-expanded="false"
+      >
+
+        ☰
+
+      </button>
+
+
+
+
+
+      <div
+
+        class="links"
+
+        id="navLinks"
+
+      >
+
+
+
+        <a href="index.html">
+
+          Trang chủ
+
+        </a>
+
+
+
+        <a
+
+          class="active"
+
+          href="product.html"
+
+        >
+
+          Sản phẩm
+
+        </a>
+
+
+
+        <a href="ingredients.html">
+
+          Nguyên liệu
+
+        </a>
+
+
+
+        <a href="research.html">
+
+          FrogNutri Lab
+
+        </a>
+
+
+
+        <a href="ai.html">
+
+          Chat bot
+
+        </a>
+
+<a href="account.html">
+
+          Tài khoản
+
+        </a>
+
+
+
+
+
+        <a class="social-nav facebook-nav" href="https://www.facebook.com/share/1M3Qi7Em8s/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="FrogNutri trên Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8z"/></svg><span>Facebook</span></a>
+
+        <a class="social-nav tiktok-nav" href="https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j" target="_blank" rel="noopener noreferrer" aria-label="Đặt mua trên TikTok FrogNutri" title="TikTok Shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 7.1a6.8 6.8 0 0 1-4.2-1.4v8.1a5.8 5.8 0 1 1-5-5.7v3.2a2.7 2.7 0 1 0 1.9 2.6V2.5h3.1c.2 2 1.8 3.6 4.2 3.9z"/></svg><span>TikTok Shop</span></a>
+
+</div>
+
+
+
+    </div>
+
+
+
+  </nav>
+
+
+
+
+
+  <!-- =======================================================
+
+       MAIN
+
+       ======================================================= -->
+
+
+
+  <main>
+
+
+
+
+
+    <!-- HERO -->
+
+
+
+    <section class="page-hero">
+
+
+
+      <div class="container hero-content">
+
+
+
+        <span class="eyebrow">
+
+          🐸 FrogNutri Product
+
+        </span>
+
+
+
+        <h1>
+
+          Sản phẩm FrogNutri
+
+        </h1>
+
+
+
+        <p class="lead">
+
+          FrogNutri hiện có ba lựa chọn:
+
+          bột ếch nguyên bản, bột ếch mix ba vị
+
+          củ hủ dừa, củ cải muối, khoai lang tím.
+
+        </p>
+
+
+
+      </div>
+
+
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+
+         PRODUCTS
+
+         ===================================================== -->
+
+
+
+    <section class="section">
+
+
+
+      <div class="container">
+
+
+
+        <div class="section-head">
+
+
+
+          <div>
+
+
+
+            <span class="eyebrow">
+
+              🐸 Hệ sản phẩm
+
+            </span>
+
+
+
+            <h2>
+
+              Ba lựa chọn hiện có
+
+            </h2>
+
+
+
+          </div>
+
+
+
+          <a
+            class="btn primary"
+            href="https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Đặt mua trên TikTok ↗</a>
+
+
+
+        </div>
+
+
+
+
+
+        <div class="product-cards">
+
+
+
+
+
+          <!-- PRODUCT 1 -->
+
+
+
+          <article class="product-card">
+
+
+
+            <div class="product-image">
+
+
+
+              <img
+
+                src="assets/img/bot-ech-nguyen-ban.jpg"
+
+                alt="Bột ếch nguyên bản"
+
+                onerror="this.src='assets/img/frognutri-logo.jpg'"
+
+              >
+
+
+
+            </div>
+
+
+
+
+
+            <div class="product-card-content">
+
+
+
+              <span class="eyebrow">
+
+                Bản nguyên bản
+
+              </span>
+
+
+
+              <h3>
+
+                Bột ếch nguyên bản
+
+              </h3>
+
+
+
+              <p>
+
+                Bột ếch nguyên bản,
+
+                đóng gói 40g mỗi túi.
+
+              </p>
+
+
+
+              <p class="product-price">
+
+                <strong>
+
+                  30.000đ / túi / 40g
+
+                </strong>
+
+              </p>
+
+
+
+
+
+              <a class="btn primary add-to-cart" href="https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j" target="_blank" rel="noopener noreferrer">Đặt mua trên TikTok ↗</a>
+
+
+
+            </div>
+
+
+
+          </article>
+
+
+
+
+
+          <!-- PRODUCT 2 -->
+
+
+
+          <article class="product-card">
+
+
+
+            <div class="product-image">
+
+
+
+              <img
+
+                src="assets/img/anh-sp.jpg"
+
+                alt="Bột ếch mix 3 vị"
+
+                onerror="this.src='assets/img/frognutri-logo.jpg'"
+
+              >
+
+
+
+            </div>
+
+
+
+
+
+            <div class="product-card-content">
+
+
+
+              <span class="eyebrow">
+
+                Mix 3 vị
+
+              </span>
+
+
+
+              <h3>
+
+                Bột ếch mix 3 vị
+
+              </h3>
+
+
+
+              <p>
+
+                Ba vị: củ hủ dừa,
+
+                củ cải muối và khoai lang tím.
+
+                Đóng gói 40g mỗi túi.
+
+              </p>
+
+
+
+              <p class="product-price">
+
+                <strong>
+
+                  39.000đ / túi / 40g
+
+                </strong>
+
+              </p>
+
+
+
+
+
+              <a class="btn primary add-to-cart" href="https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j" target="_blank" rel="noopener noreferrer">Đặt mua trên TikTok ↗</a>
+
+
+
+            </div>
+
+
+
+          </article>
+
+
+
+
+
+        
+
+          <!-- PRODUCT 3: Bánh quy phủ bột ếch -->
+          <article class="product-card">
+            <div class="product-image">
+              <img
+                src="assets/img/banh-quy-phu-bot-ech.jpg"
+                alt="Bánh quy phủ bột ếch FrogNutri"
+                onerror="this.src='assets/img/frognutri-logo.jpg'"
+              >
+            </div>
+
+            <div class="product-card-content">
+              <span class="eyebrow">Bánh quy FrogNutri</span>
+              <h3>Bánh quy phủ bột ếch</h3>
+              <p>
+                Bánh quy phủ bột ếch, đóng gói theo set
+                4 túi nhỏ tiện lợi.
+              </p>
+              <p class="product-price">
+                <strong>22.000đ / 4 túi</strong>
+              </p>
+              <a
+                class="btn primary add-to-cart"
+                href="https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Đặt mua trên TikTok ↗</a>
+            </div>
+          </article>
+
+          </div>
+
+
+
+      </div>
+
+
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+
+         LAB DATA
+
+         ===================================================== -->
+
+
+
+    <section class="section alt">
+
+
+
+      <div class="container split">
+
+
+
+        <div>
+
+
+
+          <span class="eyebrow">
+
+            Dữ liệu mẫu
+
+          </span>
+
+
+
+          <h2>
+
+            Minh bạch về những gì đã được kiểm nghiệm
+
+          </h2>
+
+
+
+          <p>
+
+            Phiếu VietLabs ngày 12/02/2026 ghi nhận
+
+            mẫu bột thân ếch có độ ẩm 4,57%,
+
+            protein 57,4%, chất béo tổng 16,8%
+
+            và canxi 5.676 mg/100 g.
+
+            Đây là dữ liệu của mẫu thử đã gửi
+
+            phòng thí nghiệm.
+
+          </p>
+
+
+
+        </div>
+
+
+
+
+
+        <div class="stats">
+
+
+
+          <div class="stat">
+
+
+
+            <strong>
+
+              4,57%
+
+            </strong>
+
+
+
+            <br>
+
+
+
+            Độ ẩm
+
+
+
+          </div>
+
+
+
+
+
+          <div class="stat">
+
+
+
+            <strong>
+
+              57,4%
+
+            </strong>
+
+
+
+            <br>
+
+
+
+            Protein
+
+
+
+          </div>
+
+
+
+
+
+          <div class="stat">
+
+
+
+            <strong>
+
+              5.676
+
+            </strong>
+
+
+
+            <br>
+
+
+
+            mg Ca/100g
+
+
+
+          </div>
+
+
+
+
+
+          <div class="stat">
+
+
+
+            <strong>
+
+              16,8%
+
+            </strong>
+
+
+
+            <br>
+
+
+
+            Chất béo tổng
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+    </section>
+
+
+
+
+
+    <!-- =====================================================
+
+         DOCUMENTS
+
+         ===================================================== -->
+
+
+
+    <section class="section">
+
+
+
+      <div class="container">
+
+
+
+        <div class="document-library">
+
+
+
+          <div class="document-head">
+
+
+
+            <div>
+
+
+
+              <span class="eyebrow">
+
+                📁 FrogNutri Documents
+
+              </span>
+
+
+
+              <h2>
+
+                Kho tài liệu &amp; minh chứng
+
+              </h2>
+
+
+
+            </div>
+
+
+
+          </div>
+
+
+
+
+
+          <div class="document-grid">
+
+
+
+
+
+            <a
+
+              class="document-card"
+
+              href="assets/docs/an-toan-ve-sinh-thuc-pham.pdf"
+
+              target="_blank"
+
+              rel="noopener"
+
+            >
+
+
+
+              <span class="document-icon">
+
+                🛡️
+
+              </span>
+
+
+
+              <div>
+
+
+
+                <h3>
+
+                  An toàn vệ sinh thực phẩm
+
+                </h3>
+
+
+
+                <p>
+
+                  Hồ sơ an toàn vệ sinh thực phẩm
+
+                </p>
+
+
+
+                <span class="doc-action">
+
+                  Mở tài liệu ↗
+
+                </span>
+
+
+
+              </div>
+
+
+
+            </a>
+
+
+
+
+
+            <a
+
+              class="document-card"
+
+              href="assets/docs/chung-nhan-chau-au.pdf"
+
+              target="_blank"
+
+              rel="noopener"
+
+            >
+
+
+
+              <span class="document-icon">
+
+                🇪🇺
+
+              </span>
+
+
+
+              <div>
+
+
+
+                <h3>
+
+                  Chứng nhận châu Âu
+
+                </h3>
+
+
+
+                <p>
+
+                  Tài liệu chứng nhận
+
+                </p>
+
+
+
+                <span class="doc-action">
+
+                  Mở tài liệu ↗
+
+                </span>
+
+
+
+              </div>
+
+
+
+            </a>
+
+
+
+
+
+            <a
+
+              class="document-card"
+
+              href="assets/docs/chung-nhan-mam-non.pdf"
+
+              target="_blank"
+
+              rel="noopener"
+
+            >
+
+
+
+              <span class="document-icon">
+
+                🧸
+
+              </span>
+
+
+
+              <div>
+
+
+
+                <h3>
+
+                  Chứng nhận mầm non
+
+                </h3>
+
+
+
+                <p>
+
+                  Tài liệu chứng nhận
+
+                </p>
+
+
+
+                <span class="doc-action">
+
+                  Mở tài liệu ↗
+
+                </span>
+
+
+
+              </div>
+
+
+
+            </a>
+
+
+
+
+
+            <a
+
+              class="document-card"
+
+              href="assets/docs/chung-nhan-y-te.pdf"
+
+              target="_blank"
+
+              rel="noopener"
+
+            >
+
+
+
+              <span class="document-icon">
+
+                🏥
+
+              </span>
+
+
+
+              <div>
+
+
+
+                <h3>
+
+                  Chứng nhận y tế
+
+                </h3>
+
+
+
+                <p>
+
+                  Tài liệu chứng nhận
+
+                </p>
+
+
+
+                <span class="doc-action">
+
+                  Mở tài liệu ↗
+
+                </span>
+
+
+
+              </div>
+
+
+
+            </a>
+
+
+
+
+
+            <a
+
+              class="document-card"
+
+              href="assets/docs/khang-sinh-thit-ech.pdf"
+
+              target="_blank"
+
+              rel="noopener"
+
+            >
+
+
+
+              <span class="document-icon">
+
+                🧪
+
+              </span>
+
+
+
+              <div>
+
+
+
+                <h3>
+
+                  Kháng sinh thịt ếch
+
+                </h3>
+
+
+
+                <p>
+
+                  Kết quả kiểm nghiệm
+
+                </p>
+
+
+
+                <span class="doc-action">
+
+                  Mở tài liệu ↗
+
+                </span>
+
+
+
+              </div>
+
+
+
+            </a>
+
+
+
+
+
+            <a
+
+              class="document-card"
+
+              href="assets/docs/vi-sinh-bot-ech.pdf"
+
+              target="_blank"
+
+              rel="noopener"
+
+            >
+
+
+
+              <span class="document-icon">
+
+                🔬
+
+              </span>
+
+
+
+              <div>
+
+
+
+                <h3>
+
+                  Vi sinh bột ếch
+
+                </h3>
+
+
+
+                <p>
+
+                  Kết quả kiểm nghiệm vi sinh
+
+                </p>
+
+
+
+                <span class="doc-action">
+
+                  Mở tài liệu ↗
+
+                </span>
+
+
+
+              </div>
+
+
+
+            </a>
+
+
+
+
+
+            <a
+
+              class="document-card"
+
+              href="assets/docs/xet-nghiem-dui-ech.pdf"
+
+              target="_blank"
+
+              rel="noopener"
+
+            >
+
+
+
+              <span class="document-icon">
+
+                🧬
+
+              </span>
+
+
+
+              <div>
+
+
+
+                <h3>
+
+                  Xét nghiệm đùi ếch
+
+                </h3>
+
+
+
+                <p>
+
+                  Kết quả xét nghiệm
+
+                </p>
+
+
+
+                <span class="doc-action">
+
+                  Mở tài liệu ↗
+
+                </span>
+
+
+
+              </div>
+
+
+
+            </a>
+
+
+
+
+
+            <a
+
+              class="document-card"
+
+              href="assets/docs/xet-nghiem-than-ech.pdf"
+
+              target="_blank"
+
+              rel="noopener"
+
+            >
+
+
+
+              <span class="document-icon">
+
+                🧫
+
+              </span>
+
+
+
+              <div>
+
+
+
+                <h3>
+
+                  Xét nghiệm thân ếch
+
+                </h3>
+
+
+
+                <p>
+
+                  Kết quả xét nghiệm
+
+                </p>
+
+
+
+                <span class="doc-action">
+
+                  Mở tài liệu ↗
+
+                </span>
+
+
+
+              </div>
+
+
+
+            </a>
+
+
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+    </section>
+
+
+
+
+
+  </main>
+
+
+
+
+
+  <!-- =======================================================
+
+       FOOTER
+
+       ======================================================= -->
+
+
+
+  <footer class="footer">
+
+
+
+    <div class="container footer-grid">
+
+
+
+      <div>
+
+
+
+        <h3>
+
+          FrogNutri 🐸
+
+        </h3>
+
+
+
+        <p>
+
+          Từ giá trị bỏ quên đến dinh dưỡng tiện lợi.
+
+        </p>
+
+
+
+        <p>
+
+          🌱 Tận dụng nguồn nguyên liệu,
+
+          nghiên cứu có dữ liệu và phát triển
+
+          sản phẩm địa phương.
+
+        </p>
+
+
+
+      </div>
+
+
+
+
+
+      <div>
+
+
+
+        <b>
+
+          Khám phá
+
+        </b>
+
+
+
+        <p>
+
+
+
+          <a href="product.html">
+
+            Sản phẩm
+
+          </a>
+
+
+
+          <br>
+
+
+
+          <a href="ingredients.html">
+
+            Nguyên liệu
+
+          </a>
+
+
+
+          <br>
+
+
+
+          <a href="research.html">
+
+            FrogNutri Lab
+
+          </a>
+
+
+
+        </p>
+
+
+
+      </div>
+
+
+
+
+
+      <div>
+
+
+
+        <b>
+
+          Kết nối
+
+        </b>
+
+
+
+        <p>
+
+
+
+          <a href="ai.html">
+
+            Chat bot
+
+          </a>
+
+
+
+          <br>
+
+
+
+          <a href="order.html">
+
+            Đặt hàng online
+
+          </a>
+
+
+
+          <br>
+
+
+
+          <a href="account.html">
+
+            Tài khoản
+
+          </a>
+
+
+
+        </p>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </footer>
+
+
+
+
+
+  <!-- =======================================================
+
+       CART DRAWER
+
+       ======================================================= -->
+
+
+
+  <!-- =======================================================
+
+       TOAST
+
+       ======================================================= -->
+
+
+
+  <div
+
+    class="toast"
+
+    id="toast"
+
+  ></div>
+
+
+
+
+
+  <!-- =======================================================
+
+       JAVASCRIPT
+
+       ======================================================= -->
+
+
+
+  <script>
+
+
+
+    /* =======================================================
+
+       SHARED CART
+
+       QUAN TRỌNG:
+
+       Tất cả các trang phải dùng cùng CART_KEY.
+
+       ======================================================= */
+
+
+
+    const CART_KEY = "frognutri_cart";
+
+
+
+
+
+    /* =======================================================
+
+       LOAD CART
+
+       ======================================================= */
+
+
+
+    function loadCart() {
+
+
+
+      try {
+
+
+
+        const saved =
+
+          localStorage.getItem(CART_KEY);
+
+
+
+        if (!saved) {
+
+          return [];
+
+        }
+
+
+
+        const parsed =
+
+          JSON.parse(saved);
+
+
+
+        return Array.isArray(parsed)
+
+          ? parsed
+
+          : [];
+
+
+
+      } catch (error) {
+
+
+
+        console.error(
+
+          "Không thể đọc giỏ hàng:",
+
+          error
+
+        );
+
+
+
+        return [];
+
+
+
+      }
+
+
+
+    }
+
+
+
+
+
+    let cart = loadCart();
+
+
+
+
+
+    /* =======================================================
+
+       DOM
+
+       ======================================================= */
+
+
+
+    const cartCount =
+
+      document.getElementById(
+
+        "cart-count"
+
+      );
+
+
+
+    const cartOverlay =
+
+      document.getElementById(
+
+        "cartOverlay"
+
+      );
+
+
+
+    const cartItems =
+
+      document.getElementById(
+
+        "cartItems"
+
+      );
+
+
+
+    const cartTotal =
+
+      document.getElementById(
+
+        "cartTotal"
+
+      );
+
+
+
+    const toast =
+
+      document.getElementById(
+
+        "toast"
+
+      );
+
+
+
+    const navLinks =
+
+      document.getElementById(
+
+        "navLinks"
+
+      );
+
+
+
+    const mobileToggle =
+
+      document.getElementById(
+
+        "mobileToggle"
+
+      );
+
+
+
+
+
+    /* =======================================================
+
+       SAVE CART
+
+       ======================================================= */
+
+
+
+    function saveCart() {
+
+
+
+      localStorage.setItem(
+
+        CART_KEY,
+
+        JSON.stringify(cart)
+
+      );
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       FORMAT MONEY
+
+       ======================================================= */
+
+
+
+    function formatMoney(number) {
+
+
+
+      return (
+
+        new Intl.NumberFormat(
+
+          "vi-VN"
+
+        ).format(number) + "đ"
+
+      );
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       ESCAPE HTML
+
+       ======================================================= */
+
+
+
+    function escapeHtml(value) {
+
+
+
+      return String(value)
+
+        .replaceAll(
+
+          "&",
+
+          "&amp;"
+
+        )
+
+        .replaceAll(
+
+          "<",
+
+          "&lt;"
+
+        )
+
+        .replaceAll(
+
+          ">",
+
+          "&gt;"
+
+        )
+
+        .replaceAll(
+
+          '"',
+
+          "&quot;"
+
+        )
+
+        .replaceAll(
+
+          "'",
+
+          "&#039;"
+
+        );
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       UPDATE CART COUNT
+
+       ======================================================= */
+
+
+
+    function updateCartCount(
+
+      animate = false
+
+    ) {
+
+
+
+      const totalQuantity =
+
+        cart.reduce(
+
+          (
+
+            total,
+
+            item
+
+          ) => {
+
+
+
+            return (
+
+              total +
+
+              Number(item.quantity || 0)
+
+            );
+
+
+
+          },
+
+          0
+
+        );
+
+
+
+
+
+      cartCount.textContent =
+
+        totalQuantity;
+
+
+
+
+
+      if (animate) {
+
+
+
+        cartCount.classList.remove(
+
+          "bump"
+
+        );
+
+
+
+        void cartCount.offsetWidth;
+
+
+
+        cartCount.classList.add(
+
+          "bump"
+
+        );
+
+
+
+      }
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       ADD TO CART
+
+       ======================================================= */
+
+
+
+    function addToCart(product) {
+
+      window.open('https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j', '_blank', 'noopener,noreferrer');
+
+      return; // Giỏ hàng trên website đã được tắt; đặt mua qua TikTok.
+
+ window.open('https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j', "_blank", "noopener,noreferrer"); return; /* legacy cart disabled */
+
+
+
+      const existing =
+
+        cart.find(
+
+          item =>
+
+            item.id === product.id
+
+        );
+
+
+
+
+
+      if (existing) {
+
+
+
+        existing.quantity =
+
+          Number(existing.quantity) + 1;
+
+
+
+        showToast(
+
+          `Đã tăng số lượng "${product.name}"`
+
+        );
+
+
+
+      } else {
+
+
+
+        cart.push({
+
+
+
+          id:
+
+            product.id,
+
+
+
+          name:
+
+            product.name,
+
+
+
+          price:
+
+            Number(product.price),
+
+
+
+          image:
+
+            product.image,
+
+
+
+          quantity:
+
+            1
+
+
+
+        });
+
+
+
+
+
+        showToast(
+
+          `🐸 Đã thêm "${product.name}" vào giỏ`
+
+        );
+
+
+
+      }
+
+
+
+
+
+      saveCart();
+
+
+
+      updateCartCount(true);
+
+
+
+      renderCart();
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       CHANGE QUANTITY
+
+       ======================================================= */
+
+
+
+    function changeQuantity(
+
+      productId,
+
+      amount
+
+    ) {
+
+
+
+      const item =
+
+        cart.find(
+
+          product =>
+
+            product.id === productId
+
+        );
+
+
+
+
+
+      if (!item) {
+
+        return;
+
+      }
+
+
+
+
+
+      item.quantity =
+
+        Number(item.quantity) + amount;
+
+
+
+
+
+      if (item.quantity <= 0) {
+
+
+
+        cart =
+
+          cart.filter(
+
+            product =>
+
+              product.id !== productId
+
+          );
+
+
+
+      }
+
+
+
+
+
+      saveCart();
+
+
+
+      updateCartCount();
+
+
+
+      renderCart();
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       REMOVE ITEM
+
+       ======================================================= */
+
+
+
+    function removeItem(
+
+      productId
+
+    ) {
+
+
+
+      const item =
+
+        cart.find(
+
+          product =>
+
+            product.id === productId
+
+        );
+
+
+
+
+
+      if (!item) {
+
+        return;
+
+      }
+
+
+
+
+
+      cart =
+
+        cart.filter(
+
+          product =>
+
+            product.id !== productId
+
+        );
+
+
+
+
+
+      saveCart();
+
+
+
+      updateCartCount();
+
+
+
+      renderCart();
+
+
+
+
+
+      showToast(
+
+        `Đã xóa "${item.name}" khỏi giỏ`
+
+      );
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       CLEAR CART
+
+       ======================================================= */
+
+
+
+    function clearCart() {
+
+
+
+      if (
+
+        cart.length === 0
+
+      ) {
+
+
+
+        showToast(
+
+          "Giỏ hàng đang trống."
+
+        );
+
+
+
+        return;
+
+      }
+
+
+
+
+
+      const confirmed =
+
+        confirm(
+
+          "Bạn có chắc muốn xóa toàn bộ giỏ hàng?"
+
+        );
+
+
+
+
+
+      if (!confirmed) {
+
+        return;
+
+      }
+
+
+
+
+
+      cart = [];
+
+
+
+
+
+      saveCart();
+
+
+
+      updateCartCount();
+
+
+
+      renderCart();
+
+
+
+
+
+      showToast(
+
+        "Đã xóa toàn bộ giỏ hàng."
+
+      );
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       CALCULATE TOTAL
+
+       ======================================================= */
+
+
+
+    function calculateTotal() {
+
+
+
+      return cart.reduce(
+
+        (
+
+          total,
+
+          item
+
+        ) => {
+
+
+
+          return (
+
+            total +
+
+            Number(item.price) *
+
+            Number(item.quantity)
+
+          );
+
+
+
+        },
+
+        0
+
+      );
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       RENDER CART
+
+       ======================================================= */
+
+
+
+    function renderCart() {
+
+
+
+      if (
+
+        cart.length === 0
+
+      ) {
+
+
+
+        cartItems.innerHTML = `
+
+
+
+          <div class="empty-cart">
+
+
+
+            <div class="empty-cart-icon">
+
+              🛒
+
+            </div>
+
+
+
+            <h3>
+
+              Giỏ hàng đang trống
+
+            </h3>
+
+
+
+            <p>
+
+              Hãy chọn sản phẩm FrogNutri
+
+              bạn muốn mua.
+
+            </p>
+
+
+
+          </div>
+
+
+
+        `;
+
+
+
+
+
+        cartTotal.textContent =
+
+          "0đ";
+
+
+
+
+
+        return;
+
+      }
+
+
+
+
+
+      cartItems.innerHTML =
+
+        cart.map(
+
+          item => {
+
+
+
+            return `
+
+
+
+              <div
+
+                class="cart-item"
+
+                data-id="${escapeHtml(item.id)}"
+
+              >
+
+
+
+                <div class="cart-item-image">
+
+
+
+                  <img
+
+                    src="${escapeHtml(item.image)}"
+
+                    alt="${escapeHtml(item.name)}"
+
+                    onerror="
+
+                      this.src='assets/img/frognutri-logo.jpg'
+
+                    "
+
+                  >
+
+
+
+                </div>
+
+
+
+
+
+                <div>
+
+
+
+                  <h4>
+
+                    ${escapeHtml(item.name)}
+
+                  </h4>
+
+
+
+                  <div class="cart-item-price">
+
+                    ${formatMoney(
+
+                      Number(item.price)
+
+                    )}
+
+                  </div>
+
+
+
+
+
+                  <div class="quantity-control">
+
+
+
+                    <button
+
+                      type="button"
+
+                      class="decrease"
+
+                      data-id="${escapeHtml(item.id)}"
+
+                    >
+
+                      −
+
+                    </button>
+
+
+
+                    <span>
+
+                      ${Number(item.quantity)}
+
+                    </span>
+
+
+
+                    <button
+
+                      type="button"
+
+                      class="increase"
+
+                      data-id="${escapeHtml(item.id)}"
+
+                    >
+
+                      +
+
+                    </button>
+
+
+
+                  </div>
+
+
+
+                </div>
+
+
+
+
+
+                <button
+
+                  type="button"
+
+                  class="remove-item"
+
+                  data-id="${escapeHtml(item.id)}"
+
+                >
+
+                  Xóa
+
+                </button>
+
+
+
+              </div>
+
+
+
+            `;
+
+
+
+          }
+
+        ).join("");
+
+
+
+
+
+      cartTotal.textContent =
+
+        formatMoney(
+
+          calculateTotal()
+
+        );
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       OPEN CART
+
+       ======================================================= */
+
+
+
+    function openCart() { return; /* disabled */
+
+
+
+      /*
+
+       * Đọc lại localStorage trước khi mở.
+
+       * Như vậy nếu dữ liệu đã thay đổi,
+
+       * giỏ hàng luôn lấy dữ liệu mới nhất.
+
+       */
+
+
+
+      cart = loadCart();
+
+
+
+      updateCartCount();
+
+
+
+      renderCart();
+
+
+
+
+
+      cartOverlay.classList.add(
+
+        "show"
+
+      );
+
+
+
+
+
+      document.body.classList.add(
+
+        "cart-open"
+
+      );
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       CLOSE CART
+
+       ======================================================= */
+
+
+
+    function closeCart() {
+
+
+
+      cartOverlay.classList.remove(
+
+        "show"
+
+      );
+
+
+
+
+
+      document.body.classList.remove(
+
+        "cart-open"
+
+      );
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       TOAST
+
+       ======================================================= */
+
+
+
+    let toastTimer;
+
+
+
+
+
+    function showToast(message) {
+
+
+
+      clearTimeout(
+
+        toastTimer
+
+      );
+
+
+
+
+
+      toast.textContent =
+
+        message;
+
+
+
+
+
+      toast.classList.add(
+
+        "show"
+
+      );
+
+
+
+
+
+      toastTimer =
+
+        setTimeout(
+
+          () => {
+
+
+
+            toast.classList.remove(
+
+              "show"
+
+            );
+
+
+
+          },
+
+          2500
+
+        );
+
+
+
+    }
+
+
+
+
+
+    /* =======================================================
+
+       ADD BUTTONS
+
+       ======================================================= */
+
+
+
+    document
+
+      .querySelectorAll(
+
+        ".add-to-cart"
+
+      )
+
+      .forEach(
+
+        button => {
+
+
+
+          button.addEventListener(
+
+            "click",
+
+            () => {
+
+
+
+              const product = {
+
+
+
+                id:
+
+                  button.dataset.id,
+
+
+
+                name:
+
+                  button.dataset.name,
+
+
+
+                price:
+
+                  Number(
+
+                    button.dataset.price
+
+                  ),
+
+
+
+                image:
+
+                  button.dataset.image
+
+
+
+              };
+
+
+
+
+
+              addToCart(
+
+                product
+
+              );
+
+
+
+            }
+
+          );
+
+
+
+        }
+
+      );
+
+
+
+
+
+    /* =======================================================
+
+       OPEN CART
+
+       ======================================================= */
+
+
+
+    document
+
+      .getElementById(
+
+        "openCart"
+
+      )
+
+      .addEventListener(
+
+        "click",
+
+        event => {
+
+
+
+          event.preventDefault();
+
+
+
+          openCart();
+
+
+
+        }
+
+      );
+
+
+
+
+
+    document
+
+      .getElementById(
+
+        "openCartTop"
+
+      )
+
+      .addEventListener(
+
+        "click",
+
+        openCart
+
+      );
+
+
+
+
+
+    /* =======================================================
+
+       CLOSE CART
+
+       ======================================================= */
+
+
+
+    document
+
+      .getElementById(
+
+        "closeCart"
+
+      )
+
+      .addEventListener(
+
+        "click",
+
+        closeCart
+
+      );
+
+
+
+
+
+    /* =======================================================
+
+       OVERLAY
+
+       ======================================================= */
+
+
+
+    cartOverlay.addEventListener(
+
+      "click",
+
+      event => {
+
+
+
+        if (
+
+          event.target ===
+
+          cartOverlay
+
+        ) {
+
+
+
+          closeCart();
+
+
+
+        }
+
+
+
+      }
+
+    );
+
+
+
+
+
+    /* =======================================================
+
+       CART ITEM ACTIONS
+
+       ======================================================= */
+
+
+
+    cartItems.addEventListener(
+
+      "click",
+
+      event => {
+
+
+
+        const button =
+
+          event.target.closest(
+
+            "button"
+
+          );
+
+
+
+
+
+        if (!button) {
+
+          return;
+
+        }
+
+
+
+
+
+        const productId =
+
+          button.dataset.id;
+
+
+
+
+
+        if (
+
+          button.classList.contains(
+
+            "increase"
+
+          )
+
+        ) {
+
+
+
+          changeQuantity(
+
+            productId,
+
+            1
+
+          );
+
+
+
+        }
+
+
+
+
+
+        if (
+
+          button.classList.contains(
+
+            "decrease"
+
+          )
+
+        ) {
+
+
+
+          changeQuantity(
+
+            productId,
+
+            -1
+
+          );
+
+
+
+        }
+
+
+
+
+
+        if (
+
+          button.classList.contains(
+
+            "remove-item"
+
+          )
+
+        ) {
+
+
+
+          removeItem(
+
+            productId
+
+          );
+
+
+
+        }
+
+
+
+      }
+
+    );
+
+
+
+
+
+    /* =======================================================
+
+       CLEAR CART
+
+       ======================================================= */
+
+
+
+    document
+
+      .getElementById(
+
+        "clearCart"
+
+      )
+
+      .addEventListener(
+
+        "click",
+
+        clearCart
+
+      );
+
+
+
+
+
+    /* =======================================================
+
+       CHECKOUT
+
+       ======================================================= */
+
+
+
+    document
+
+      .getElementById(
+
+        "checkoutBtn"
+
+      )
+
+      .addEventListener(
+
+        "click",
+
+        () => {
+
+
+
+          /*
+
+           * Đọc lại dữ liệu trước khi chuyển trang.
+
+           */
+
+
+
+          cart =
+
+            loadCart();
+
+
+
+
+
+          if (
+
+            cart.length === 0
+
+          ) {
+
+
+
+            showToast(
+
+              "Giỏ hàng đang trống."
+
+            );
+
+
+
+            return;
+
+          }
+
+
+
+
+
+          /*
+
+           * order.html cũng phải dùng
+
+           * CART_KEY = "frognutri_cart"
+
+           * để đọc cùng giỏ hàng.
+
+           */
+
+
+
+          window.location.href =
+
+            "order.html";
+
+
+
+        }
+
+      );
+
+
+
+
+
+    /* =======================================================
+
+       MOBILE MENU
+
+       ======================================================= */
+
+
+
+    mobileToggle.addEventListener(
+
+      "click",
+
+      () => {
+
+
+
+        const isOpen =
+
+          navLinks.classList.toggle(
+
+            "show"
+
+          );
+
+
+
+
+
+        mobileToggle.setAttribute(
+
+          "aria-expanded",
+
+          isOpen
+
+        );
+
+
+
+      }
+
+    );
+
+
+
+
+
+    /* =======================================================
+
+       CLOSE MOBILE MENU
+
+       ======================================================= */
+
+
+
+    navLinks
+
+      .querySelectorAll("a")
+
+      .forEach(
+
+        link => {
+
+
+
+          link.addEventListener(
+
+            "click",
+
+            () => {
+
+
+
+              navLinks.classList.remove(
+
+                "show"
+
+              );
+
+
+
+              mobileToggle.setAttribute(
+
+                "aria-expanded",
+
+                "false"
+
+              );
+
+
+
+            }
+
+          );
+
+
+
+        }
+
+      );
+
+
+
+
+
+    /* =======================================================
+
+       ESC KEY
+
+       ======================================================= */
+
+
+
+    document.addEventListener(
+
+      "keydown",
+
+      event => {
+
+
+
+        if (
+
+          event.key === "Escape"
+
+        ) {
+
+
+
+          closeCart();
+
+
+
+          navLinks.classList.remove(
+
+            "show"
+
+          );
+
+
+
+        }
+
+
+
+      }
+
+    );
+
+
+
+
+
+    /* =======================================================
+
+       STORAGE EVENT
+
+       =======================================================
+
+
+
+       Nếu người dùng mở nhiều tab/trang,
+
+       khi localStorage thay đổi ở tab khác,
+
+       tab hiện tại sẽ cập nhật số giỏ hàng.
+
+       ======================================================= */
+
+
+
+    window.addEventListener(
+
+      "storage",
+
+      event => {
+
+
+
+        if (
+
+          event.key !== CART_KEY
+
+        ) {
+
+          return;
+
+        }
+
+
+
+
+
+        cart =
+
+          loadCart();
+
+
+
+
+
+        updateCartCount();
+
+
+
+        renderCart();
+
+
+
+      }
+
+    );
+
+
+
+
+
+    /* =======================================================
+
+       INITIALIZE
+
+       ======================================================= */
+
+
+
+    cart =
+
+      loadCart();
+
+
+
+    updateCartCount();
+
+
+
+    renderCart();
+
+
+
+  </script>
+
+
+
+<script src="script.js"></script></body>
+
+</html>

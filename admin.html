@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FrogNutri Admin | Đơn hàng</title>
+<link rel="icon" href="assets/img/frognutri-logo.jpg"><link rel="stylesheet" href="styles.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>window.FN_SUPABASE_URL ||= 'https://aoqshriypbwkadprzxgy.supabase.co';window.FN_SUPABASE_PUBLISHABLE_KEY ||= 'sb_publishable_5dpQ-GK4H4YSyUfcZ1b63A_YlLrsnnU';window.FN_SUPABASE_READY=true;</script>
+<style>.admin-grid{display:grid;gap:18px}.admin-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.admin-table{overflow:auto}.admin-table table{width:100%;border-collapse:collapse;min-width:1050px}.admin-table th,.admin-table td{padding:12px;border-bottom:1px solid #e4ece8;text-align:left;vertical-align:top}.admin-table th{background:#f5faf7}.status-select{padding:8px;border:1px solid #d4e2db;border-radius:10px;background:#fff}.login-box{max-width:480px;margin:auto}.muted{color:#6c7a74}.error{color:#a52f2f}.stats{display:flex;gap:10px;flex-wrap:wrap}.stat{padding:10px 14px;background:#eef8f2;border-radius:14px}.product-lines{line-height:1.6}</style>
+</head><body>
+<div class="topbar"><div class="container"><span>🐸 FrogNutri • Quản lý đơn hàng</span><span>🔐 Khu vực quản trị</span></div></div>
+<nav class="nav"><div class="container nav-inner"><a class="brand" href="index.html"><img src="assets/img/frognutri-logo.jpg" alt="FrogNutri"><div><strong>FrogNutri</strong><small>Quản lý đơn hàng</small></div></a><button class="mobile-toggle" data-mobile type="button">☰</button><div class="links"><a href="index.html">Trang chủ</a><a class="active" href="admin.html">Quản trị</a></div></div></nav>
+<main><section class="page-hero"><div class="container"><span class="eyebrow">🔐 FrogNutri Admin</span><h1>Quản lý đơn hàng</h1><p class="lead">Đơn mới từ khách sẽ xuất hiện tại đây và đồng bộ trạng thái về tài khoản khách.</p></div></section>
+<section class="section"><div class="container">
+<div id="loginBox" class="card login-box"><h2>Đăng nhập quản trị</h2><p class="muted">Dùng đúng email đã có trong bảng <code>frognutri_admins</code>.</p><label>Email</label><input id="email" type="email" autocomplete="username"><label>Mật khẩu</label><input id="password" type="password" autocomplete="current-password"><button id="loginBtn" class="btn primary full" type="button">Đăng nhập</button><div id="loginMsg" class="note" style="margin-top:12px"></div></div>
+<div id="app" class="admin-grid hidden"><div class="card"><div class="admin-toolbar"><b id="identity"></b><button id="refreshBtn" class="btn" type="button">↻ Cập nhật</button><button id="logoutBtn" class="btn" type="button">Đăng xuất</button><span id="updated" class="muted"></span></div><div class="stats" style="margin-top:14px"><span class="stat">Tổng: <b id="statAll">0</b></span><span class="stat">Chờ xác nhận: <b id="statPending">0</b></span><span class="stat">Đang giao: <b id="statShipping">0</b></span><span class="stat">Đã nhận: <b id="statReceived">0</b></span></div></div>
+<div class="card admin-table"><table><thead><tr><th>Mã đơn</th><th>Khách hàng</th><th>Sản phẩm</th><th>Thanh toán</th><th>Tổng</th><th>Trạng thái</th></tr></thead><tbody id="body"><tr><td colspan="6">Đang tải...</td></tr></tbody></table></div></div>
+</div></section></main>
+<script src="script.js"></script><script>
+(()=>{
+const sb=window.supabase.createClient(window.FN_SUPABASE_URL,window.FN_SUPABASE_PUBLISHABLE_KEY),$=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const money=n=>Number(n||0).toLocaleString('vi-VN')+'đ';
+const STATUS={pending:'Chờ xác nhận',confirmed:'Đã xác nhận',preparing:'Đang gửi',shipping:'Đang giao',delivered:'Đã giao',received:'Đã nhận',cancelled:'Đã hủy'};
+async function user(){const r=await sb.auth.getUser();return r.data?.user||null}
+async function checkAdmin(){const r=await sb.rpc('is_frognutri_admin');if(r.error)throw r.error;return r.data===true;}
+async function load(){
+ try{
+  const u=await user(); if(!u){$('app').classList.add('hidden');$('loginBox').classList.remove('hidden');return;}
+  if(!(await checkAdmin())){ $('app').classList.add('hidden');$('loginBox').classList.remove('hidden');$('loginMsg').innerHTML='<span class="error">Tài khoản này chưa có quyền Admin.</span>';return; }
+  $('loginBox').classList.add('hidden');$('app').classList.remove('hidden');$('identity').textContent='👤 '+u.email;
+  const r=await sb.rpc('get_admin_frognutri_orders');if(r.error)throw r.error;const orders=Array.isArray(r.data)?r.data:[];
+  $('statAll').textContent=orders.length;$('statPending').textContent=orders.filter(o=>o.status==='pending').length;$('statShipping').textContent=orders.filter(o=>o.status==='shipping').length;$('statReceived').textContent=orders.filter(o=>o.status==='received').length;
+  $('body').innerHTML=orders.length?orders.map(o=>{const c=o.customer||{};const lines=Array.isArray(o.items)?o.items.map(i=>esc(i.name)+' × '+Number(i.quantity||0)).join('<br>'):'';return `<tr><td><b>${esc(o.id)}</b><br><small>${o.created_at?new Date(o.created_at).toLocaleString('vi-VN'):''}</small></td><td><b>${esc(c.name)}</b><br>${esc(c.phone)}<br>${esc(c.email)}<br>${esc(c.address)}${c.note?'<br>Ghi chú: '+esc(c.note):''}</td><td class="product-lines">${lines}</td><td>${o.payment_method==='bank'?'Chuyển khoản':'COD'}</td><td><b>${money(o.total)}</b></td><td><select class="status-select" data-id="${esc(o.id)}">${Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${o.status===k?'selected':''}>${v}</option>`).join('')}</select></td></tr>`}).join(''):'<tr><td colspan="6">Chưa có đơn hàng.</td></tr>';
+  $('updated').textContent='Cập nhật '+new Date().toLocaleTimeString('vi-VN');
+ }catch(e){$('body').innerHTML='<tr><td colspan="6" class="error">'+esc(e.message||e)+'</td></tr>';}
+}
+$('loginBtn').onclick=async()=>{const email=$('email').value.trim().toLowerCase(),password=$('password').value;$('loginMsg').textContent='Đang đăng nhập...';const r=await sb.auth.signInWithPassword({email,password});if(r.error){$('loginMsg').innerHTML='<span class="error">'+esc(r.error.message)+'</span>';return;}$('loginMsg').textContent='';load();};
+$('logoutBtn').onclick=async()=>{await sb.auth.signOut();load();};$('refreshBtn').onclick=load;
+$('body').addEventListener('change',async e=>{const s=e.target.closest('[data-id]');if(!s)return;s.disabled=true;const r=await sb.rpc('update_frognutri_order_status',{p_id:s.dataset.id,p_status:s.value});if(r.error)alert(r.error.message);await load();});
+sb.auth.onAuthStateChange(()=>setTimeout(load,0));load();setInterval(load,15000);
+})();
+</script></body></html>

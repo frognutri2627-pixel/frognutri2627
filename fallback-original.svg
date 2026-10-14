@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+<defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#edf9f2"/><stop offset="1" stop-color="#fff"/></linearGradient>
+<filter id="s"><feDropShadow dx="0" dy="14" stdDeviation="18" flood-opacity=".12"/></filter></defs>
+<rect width="1000" height="700" fill="url(#g)"/>
+<circle cx="110" cy="100" r="65" fill="#238b55" opacity=".10"/><circle cx="900" cy="610" r="120" fill="#238b55" opacity=".08"/>
+<rect x="250" y="100" width="500" height="410" rx="38" fill="#fff" filter="url(#s)"/>
+<text x="500" y="255" text-anchor="middle" font-size="110">🐸</text>
+<text x="500" y="345" text-anchor="middle" font-family="Arial,sans-serif" font-weight="800" font-size="44" fill="#18352a">Bột ếch FrogNutri</text>
+<text x="500" y="392" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" fill="#587166">Phiên bản Original</text>
+<rect x="350" y="435" width="300" height="10" rx="5" fill="#238b55" opacity=".22"/>
+<text x="500" y="580" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="22" fill="#238b55">FrogNutri • hình minh họa dự phòng</text>
+</svg>

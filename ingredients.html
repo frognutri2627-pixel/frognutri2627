@@ -1,0 +1,1846 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Các nguyên liệu đang được nghiên cứu và phát triển trong hệ sản phẩm FrogNutri."
+  >
+
+  <title>Nguyên liệu | FrogNutri</title>
+
+  <link
+    rel="icon"
+    href="assets/img/frognutri-logo.jpg"
+  >
+
+  <style>
+
+    /* =====================================================
+       FROGNUTRI - GLOBAL
+    ===================================================== */
+
+    :root {
+      --green: #2f9b63;
+      --green2: #176c45;
+      --green3: #0f4d34;
+
+      --mint: #e9f8f0;
+      --mint2: #d8f1e3;
+
+      --ink: #16382b;
+      --muted: #667970;
+
+      --line: #dbeae2;
+
+      --white: #ffffff;
+
+      --shadow-sm:
+        0 8px 24px rgba(23, 76, 52, .07);
+
+      --shadow:
+        0 18px 55px rgba(23, 76, 52, .11);
+
+      --radius: 24px;
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+      margin: 0;
+
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      color: var(--ink);
+
+      background:
+        linear-gradient(
+          180deg,
+          #fbfefc 0%,
+          #f8fcfa 100%
+        );
+
+      line-height: 1.65;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+
+    .container {
+      width:
+        min(
+          1160px,
+          calc(100% - 36px)
+        );
+
+      margin: auto;
+    }
+
+
+    ::selection {
+      background: #bfe9d0;
+      color: var(--green3);
+    }
+
+
+    /* =====================================================
+       TOPBAR
+    ===================================================== */
+
+    .topbar {
+      background:
+        linear-gradient(
+          90deg,
+          #103e2a,
+          #1d6946,
+          #103e2a
+        );
+
+      color: #eaf8f0;
+
+      font-size: 13px;
+
+      box-shadow:
+        0 2px 15px
+        rgba(15, 77, 52, .12);
+    }
+
+
+    .topbar .container {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 8px 0;
+    }
+
+
+    /* =====================================================
+       NAVIGATION
+    ===================================================== */
+
+    .nav {
+      position: sticky;
+
+      top: 0;
+
+      z-index: 20;
+
+      background:
+        rgba(255, 255, 255, .94);
+
+      backdrop-filter:
+        blur(14px);
+
+      border-bottom:
+        1px solid var(--line);
+
+      box-shadow:
+        0 8px 28px
+        rgba(25, 76, 53, .05);
+    }
+
+
+    .nav-inner {
+      min-height: 82px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 22px;
+    }
+
+
+    .brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      min-width: max-content;
+    }
+
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+
+      border-radius: 14px;
+
+      object-fit: cover;
+
+      box-shadow:
+        0 5px 18px
+        rgba(35, 132, 82, .16);
+
+      transition: .3s;
+    }
+
+
+    .brand:hover img {
+      transform:
+        rotate(-4deg)
+        scale(1.04);
+    }
+
+
+    .brand strong {
+      display: block;
+
+      font-size: 18px;
+    }
+
+
+    .brand small {
+      display: block;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+
+    .links {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: flex-end;
+
+      gap: 5px;
+
+      flex: 1;
+    }
+
+
+    .links a {
+      padding: 9px 10px;
+
+      border-radius: 10px;
+
+      font-weight: 700;
+
+      font-size: 13px;
+
+      transition:
+        background .2s,
+        color .2s,
+        transform .2s;
+    }
+
+
+    .links a:hover,
+    .links a.active {
+      background: var(--mint);
+
+      color: var(--green2);
+
+      transform:
+        translateY(-1px);
+    }
+
+
+    .mobile-toggle {
+      display: none;
+
+      border: 0;
+
+      background: var(--mint);
+
+      color: var(--green2);
+
+      border-radius: 10px;
+
+      padding: 8px 11px;
+
+      font-size: 20px;
+
+      cursor: pointer;
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
+
+    .page-hero {
+      position: relative;
+
+      overflow: hidden;
+
+      padding: 75px 0 65px;
+
+      background:
+        radial-gradient(
+          circle at 90% 20%,
+          #dff5e8 0,
+          transparent 32%
+        ),
+        linear-gradient(
+          135deg,
+          #f5fcf8,
+          #ffffff
+        );
+    }
+
+
+    .page-hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 420px;
+      height: 420px;
+
+      border-radius: 50%;
+
+      right: -180px;
+      top: -190px;
+
+      background:
+        rgba(90, 191, 128, .10);
+
+      filter: blur(4px);
+
+      pointer-events: none;
+    }
+
+
+    .page-hero::after {
+      content: "";
+
+      position: absolute;
+
+      width: 220px;
+      height: 220px;
+
+      border-radius: 50%;
+
+      left: -120px;
+      bottom: -130px;
+
+      background:
+        rgba(221, 170, 214, .10);
+
+      pointer-events: none;
+    }
+
+
+    .page-hero .container {
+      position: relative;
+
+      z-index: 1;
+    }
+
+
+    .eyebrow {
+      display: inline-block;
+
+      color: var(--green);
+
+      font-weight: 800;
+
+      font-size: 13px;
+
+      letter-spacing: .04em;
+
+      margin-bottom: 10px;
+
+      padding: 6px 11px;
+
+      border-radius: 999px;
+
+      background: var(--mint);
+
+      border: 1px solid #d4eddf;
+    }
+
+
+    .page-hero h1 {
+      max-width: 820px;
+
+      margin: 0 0 16px;
+
+      color: #173d2a;
+
+      font-size:
+        clamp(
+          38px,
+          6vw,
+          62px
+        );
+
+      line-height: 1.08;
+
+      letter-spacing: -.04em;
+    }
+
+
+    .lead {
+      max-width: 760px;
+
+      color: #64756d;
+
+      font-size: 18px;
+
+      margin: 0;
+    }
+
+
+    /* =====================================================
+       SECTION
+    ===================================================== */
+
+    .section {
+      padding: 72px 0;
+    }
+
+
+    .section.alt {
+      background:
+        linear-gradient(
+          180deg,
+          #f1faf5,
+          #eef8f2
+        );
+    }
+
+
+    .intro-box {
+      max-width: 850px;
+
+      margin:
+        0 auto 48px;
+
+      text-align: center;
+    }
+
+
+    .intro-box h2 {
+      margin: 5px 0 14px;
+
+      color: var(--ink);
+
+      font-size:
+        clamp(
+          28px,
+          4vw,
+          40px
+        );
+
+      line-height: 1.2;
+    }
+
+
+    .intro-box p {
+      margin: 0;
+
+      color: var(--muted);
+
+      font-size: 17px;
+    }
+
+
+    /* =====================================================
+       INGREDIENT GRID
+    ===================================================== */
+
+    .ingredient-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          4,
+          minmax(0, 1fr)
+        );
+
+      gap: 22px;
+    }
+
+
+    /* =====================================================
+       INGREDIENT CARD
+    ===================================================== */
+
+    .ingredient-card {
+      position: relative;
+
+      overflow: hidden;
+
+      display: flex;
+
+      flex-direction: column;
+
+      background: #fff;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 22px;
+
+      box-shadow:
+        var(--shadow-sm);
+
+      transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+    }
+
+
+    .ingredient-card::before {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      top: 0;
+
+      height: 4px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #35a96b,
+          #8bd2a9
+        );
+
+      opacity: 0;
+
+      transition: .25s;
+
+      z-index: 2;
+    }
+
+
+    .ingredient-card:hover {
+      transform:
+        translateY(-7px);
+
+      box-shadow:
+        var(--shadow);
+
+      border-color:
+        #c9e5d5;
+    }
+
+
+    .ingredient-card:hover::before {
+      opacity: 1;
+    }
+
+
+    /* =====================================================
+       INGREDIENT IMAGE
+    ===================================================== */
+
+    .ingredient-image {
+      width: 100%;
+
+      height: 235px;
+
+      overflow: hidden;
+
+      background:
+        #eef7f1;
+    }
+
+
+    .ingredient-image img {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+
+      transition:
+        transform .45s ease,
+        filter .35s ease;
+    }
+
+
+    .ingredient-card:hover
+    .ingredient-image img {
+      transform:
+        scale(1.07);
+
+      filter:
+        saturate(1.04);
+    }
+
+
+    /* =====================================================
+       CARD CONTENT
+    ===================================================== */
+
+    .ingredient-card .copy {
+      padding: 21px 20px 23px;
+    }
+
+
+    .ingredient-number {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      min-width: 34px;
+
+      height: 24px;
+
+      padding: 0 9px;
+
+      margin-bottom: 9px;
+
+      border-radius: 999px;
+
+      background: var(--mint);
+
+      border:
+        1px solid #cde9d9;
+
+      color: var(--green2);
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      letter-spacing: .08em;
+    }
+
+
+    .ingredient-card h3 {
+      margin: 0 0 9px;
+
+      color: #193e2b;
+
+      font-size: 21px;
+
+      line-height: 1.25;
+    }
+
+
+    .ingredient-card p {
+      margin: 0;
+
+      color: #68776f;
+
+      font-size: 14px;
+
+      line-height: 1.65;
+    }
+
+
+    /* =====================================================
+       STORY
+    ===================================================== */
+
+    .story-grid {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 55px;
+
+      align-items: center;
+    }
+
+
+    .story-image {
+      overflow: hidden;
+
+      border-radius: 25px;
+
+      border:
+        1px solid var(--line);
+
+      box-shadow:
+        var(--shadow);
+    }
+
+
+    .story-image img {
+      width: 100%;
+
+      display: block;
+
+      aspect-ratio: 4 / 3;
+
+      object-fit: cover;
+
+      transition:
+        transform .5s ease;
+    }
+
+
+    .story-image:hover img {
+      transform:
+        scale(1.035);
+    }
+
+
+    .story-copy h2 {
+      margin: 5px 0 18px;
+
+      color: var(--ink);
+
+      font-size:
+        clamp(
+          28px,
+          4vw,
+          40px
+        );
+
+      line-height: 1.2;
+    }
+
+
+    .story-copy p {
+      margin:
+        0 0 15px;
+
+      color: var(--muted);
+    }
+
+
+    /* =====================================================
+       RESEARCH BOX
+    ===================================================== */
+
+    .research-box {
+      position: relative;
+
+      overflow: hidden;
+
+      padding: 38px;
+
+      border-radius: 26px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #176c45,
+          #2f9b63
+        );
+
+      color: white;
+
+      box-shadow:
+        0 18px 50px
+        rgba(23, 108, 69, .18);
+    }
+
+
+    .research-box::after {
+      content: "🧪";
+
+      position: absolute;
+
+      right: 30px;
+      bottom: -32px;
+
+      font-size: 130px;
+
+      opacity: .07;
+
+      pointer-events: none;
+    }
+
+
+    .research-box .eyebrow {
+      color: #d9f0e1;
+
+      background:
+        rgba(255,255,255,.10);
+
+      border-color:
+        rgba(255,255,255,.16);
+    }
+
+
+    .research-box h2 {
+      position: relative;
+
+      z-index: 1;
+
+      margin: 4px 0 15px;
+
+      font-size:
+        clamp(
+          28px,
+          4vw,
+          36px
+        );
+
+      line-height: 1.2;
+    }
+
+
+    .research-box p {
+      position: relative;
+
+      z-index: 1;
+
+      max-width: 780px;
+
+      margin: 0;
+
+      color: #e4f2e8;
+
+      font-size: 15px;
+    }
+
+
+    /* =====================================================
+       BUTTON
+    ===================================================== */
+
+    .btn {
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 7px;
+
+      min-height: 45px;
+
+      padding: 11px 18px;
+
+      border-radius: 13px;
+
+      font-size: 14px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      transition: .2s;
+
+      box-shadow:
+        0 7px 18px
+        rgba(24,91,60,.08);
+    }
+
+
+    .btn:hover {
+      transform:
+        translateY(-2px);
+    }
+
+
+    .btn.secondary {
+      background: #fff;
+
+      color: var(--green2);
+
+      border:
+        1px solid var(--line);
+    }
+
+
+    .btn.secondary:hover {
+      background: var(--mint);
+
+      border-color:
+        #b9ddc8;
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    .footer {
+      position: relative;
+
+      overflow: hidden;
+
+      padding: 50px 0;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(83,171,116,.20),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #103e2a,
+          #173d2a
+        );
+
+      color: #d8e9df;
+    }
+
+
+    .footer::after {
+      content: "🐸";
+
+      position: absolute;
+
+      right: 5%;
+      bottom: -30px;
+
+      font-size: 130px;
+
+      opacity: .045;
+
+      pointer-events: none;
+    }
+
+
+    .footer-grid {
+      display: grid;
+
+      grid-template-columns:
+        2fr 1fr 1fr;
+
+      gap: 30px;
+    }
+
+
+    .footer h3 {
+      margin:
+        0 0 10px;
+
+      color: #fff;
+    }
+
+
+    .footer b {
+      color: #fff;
+    }
+
+
+    .footer p {
+      margin:
+        8px 0;
+
+      color: #c3d8ca;
+
+      font-size: 14px;
+    }
+
+
+    .footer a:hover {
+      color: #fff;
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 1000px) {
+
+      .ingredient-grid {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
+      }
+
+
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+
+    @media (max-width: 950px) {
+
+      .mobile-toggle {
+        display: block;
+      }
+
+
+      .links {
+        display: none;
+
+        position: absolute;
+
+        top: 82px;
+
+        left: 18px;
+        right: 18px;
+
+        padding: 10px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        background: #fff;
+
+        border:
+          1px solid var(--line);
+
+        border-radius: 15px;
+
+        box-shadow:
+          var(--shadow);
+
+        z-index: 50;
+      }
+
+
+      .links.show {
+        display: flex;
+      }
+
+
+      .links a {
+        width: 100%;
+
+        text-align: left;
+      }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+      .container {
+        width:
+          min(
+            100% - 24px,
+            1160px
+          );
+      }
+
+
+      .topbar .container {
+        padding: 8px 0;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 2px;
+      }
+
+
+      .topbar .container span:last-child {
+        display: none;
+      }
+
+
+      .brand small {
+        display: none;
+      }
+
+
+      .page-hero {
+        padding:
+          55px 0
+          48px;
+      }
+
+
+      .page-hero h1 {
+        font-size: 40px;
+      }
+
+
+      .lead {
+        font-size: 16px;
+      }
+
+
+      .section {
+        padding: 55px 0;
+      }
+
+
+      .intro-box {
+        margin-bottom: 35px;
+      }
+
+
+      .intro-box h2 {
+        font-size: 29px;
+      }
+
+
+      .ingredient-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .ingredient-image {
+        height: 260px;
+      }
+
+
+      .story-grid {
+        gap: 30px;
+      }
+
+
+      .research-box {
+        padding: 27px 23px;
+      }
+
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+
+        gap: 24px;
+      }
+
+    }
+
+  </style>
+
+
+<style>
+/* FrogNutri shared navigation polish */
+.links{align-items:center;gap:clamp(8px,1vw,16px)}
+.social-nav{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border:1px solid #dcebe3;border-radius:999px;background:#fff;color:#245b43;font-size:13px;font-weight:750;text-decoration:none;white-space:nowrap;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.social-nav:hover{transform:translateY(-2px);box-shadow:0 6px 18px #164e351a;background:#f2fbf5}
+.social-nav svg{width:18px;height:18px;fill:currentColor;flex:none}
+.tiktok-nav{background:#17221d;color:#fff;border-color:#17221d}.tiktok-nav:hover{background:#304b3e;color:#fff}
+.facebook-nav{color:#1766d1}
+@media(max-width:980px){.links .social-nav{width:100%;justify-content:flex-start;border-radius:12px;padding:11px 13px}}
+/* Cart UI is intentionally removed; purchase checkout happens on TikTok Shop. */
+#cartOverlay,#cartDrawer,.cart-drawer,.cart-link,[data-cart-count],#openCartTop{display:none!important}
+.auth-panel{box-shadow:0 18px 55px rgba(32,83,57,.08)}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>window.FN_SUPABASE_URL ||= 'https://aoqshriypbwkadprzxgy.supabase.co';window.FN_SUPABASE_PUBLISHABLE_KEY ||= 'sb_publishable_5dpQ-GK4H4YSyUfcZ1b63A_YlLrsnnU';window.FN_SUPABASE_READY=true;document.documentElement.classList.add('fn-auth-check');</script>
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       TOPBAR
+  ====================================================== -->
+
+  <div class="topbar">
+
+    <div class="container">
+
+      <span>
+        🐸 FrogNutri • Từ giá trị bỏ quên đến dinh dưỡng tiện lợi
+      </span>
+
+      <span>
+        🌱 Phiên bản phát triển 2026–2027
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+
+  <nav class="nav">
+
+    <div class="container nav-inner">
+
+
+      <a
+        class="brand"
+        href="index.html"
+      >
+
+        <img
+          src="assets/img/frognutri-logo.jpg"
+          alt="FrogNutri"
+        >
+
+        <div>
+
+          <strong>
+            FrogNutri
+          </strong>
+
+          <small>
+            Từ giá trị bỏ quên đến
+            dinh dưỡng tiện lợi.
+          </small>
+
+        </div>
+
+      </a>
+
+
+      <button
+        class="mobile-toggle"
+        id="mobileToggle"
+        type="button"
+        aria-label="Mở menu"
+      >
+        ☰
+      </button>
+
+
+      <div
+        class="links"
+        id="navLinks"
+      >
+
+        <a href="index.html">
+          Trang chủ
+        </a>
+
+        <a href="product.html">
+          Sản phẩm
+        </a>
+
+        <a
+          class="active"
+          href="ingredients.html"
+        >
+          Nguyên liệu
+        </a>
+
+        <a href="research.html">
+          FrogNutri Lab
+        </a>
+
+        <a href="ai.html">
+          AI &amp; Khảo sát
+        </a>
+
+      
+
+        <a href="account.html">
+          Tài khoản
+        </a>
+
+      
+        <a class="social-nav facebook-nav" href="https://www.facebook.com/share/1M3Qi7Em8s/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="FrogNutri trên Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8z"/></svg><span>Facebook</span></a>
+        <a class="social-nav tiktok-nav" href="https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j" target="_blank" rel="noopener noreferrer" aria-label="Đặt mua trên TikTok FrogNutri" title="TikTok Shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 7.1a6.8 6.8 0 0 1-4.2-1.4v8.1a5.8 5.8 0 1 1-5-5.7v3.2a2.7 2.7 0 1 0 1.9 2.6V2.5h3.1c.2 2 1.8 3.6 4.2 3.9z"/></svg><span>TikTok Shop</span></a>
+</div>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main>
+
+
+    <!-- ===================================================
+         HERO
+    ==================================================== -->
+
+    <section class="page-hero">
+
+      <div class="container">
+
+        <span class="eyebrow">
+          🌾 FrogNutri Ingredients
+        </span>
+
+        <h1>
+          Những nguyên liệu
+          tạo nên câu chuyện FrogNutri
+        </h1>
+
+        <p class="lead">
+          Từ nền bột ếch đến các nguyên liệu
+          thực vật địa phương, mỗi thành phần
+          được nghiên cứu với một vai trò riêng
+          trong hành trình phát triển sản phẩm.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         INGREDIENTS
+    ==================================================== -->
+
+    <section class="section">
+
+      <div class="container">
+
+
+        <div class="intro-box">
+
+          <span class="eyebrow">
+            🌱 Bốn mảnh ghép
+          </span>
+
+          <h2>
+            Bốn nguyên liệu,
+            bốn vai trò khác nhau
+          </h2>
+
+          <p>
+            FrogNutri tập trung nghiên cứu
+            sự kết hợp giữa nguồn nguyên liệu
+            giàu tiềm năng và những nguyên liệu
+            thực vật quen thuộc tại địa phương.
+          </p>
+
+        </div>
+
+
+        <div class="ingredient-grid">
+
+
+          <!-- =================================================
+               01 - BỘT ẾCH
+          ================================================== -->
+
+          <article class="ingredient-card">
+
+            <div class="ingredient-image">
+
+              <img
+                src="assets/img/bot-ech-frognutri.jpg"
+                alt="Sản phẩm bột FrogNutri"
+                onerror="
+                  this.src='assets/img/frognutri-logo.jpg';
+                "
+              >
+
+            </div>
+
+
+            <div class="copy">
+
+              <span class="ingredient-number">
+                01
+              </span>
+
+              <h3>
+                🐸 Nền bột ếch
+              </h3>
+
+              <p>
+                Nền tảng của FrogNutri —
+                nghiên cứu từ thân và xương ếch.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- =================================================
+               02 - KHOAI LANG TÍM
+          ================================================== -->
+
+          <article class="ingredient-card">
+
+            <div class="ingredient-image">
+
+              <img
+                src="assets/img/khoai-lang-tim.jpg"
+                alt="Khoai lang tím"
+                onerror="
+                  this.src='assets/img/frognutri-logo.jpg';
+                "
+              >
+
+            </div>
+
+
+            <div class="copy">
+
+              <span class="ingredient-number">
+                02
+              </span>
+
+              <h3>
+                🟣 Khoai lang tím
+              </h3>
+
+              <p>
+                Nguyên liệu thực vật được nghiên cứu
+                về màu sắc và cảm quan.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- =================================================
+               03 - CỦ CẢI MUỐI
+          ================================================== -->
+
+          <article class="ingredient-card">
+
+            <div class="ingredient-image">
+
+              <img
+                src="assets/img/cu-cai-muoi.jpg"
+                alt="Củ cải muối"
+                onerror="
+                  this.src='assets/img/frognutri-logo.jpg';
+                "
+              >
+
+            </div>
+
+
+            <div class="copy">
+
+              <span class="ingredient-number">
+                03
+              </span>
+
+              <h3>
+                🥕 Củ cải muối
+              </h3>
+
+              <p>
+                Điểm nhấn hương vị,
+                không phải thành phần chính.
+              </p>
+
+            </div>
+
+          </article>
+
+
+          <!-- =================================================
+               04 - CỦ HỦ DỪA
+          ================================================== -->
+
+          <article class="ingredient-card">
+
+            <div class="ingredient-image">
+
+              <img
+                src="assets/img/cu-hu-dua.jpg"
+                alt="Củ hủ dừa"
+                onerror="
+                  this.src='assets/img/frognutri-logo.jpg';
+                "
+              >
+
+            </div>
+
+
+            <div class="copy">
+
+              <span class="ingredient-number">
+                04
+              </span>
+
+              <h3>
+                🌴 Củ hủ dừa
+              </h3>
+
+              <p>
+                Thử nghiệm như một dấu ấn
+                thực vật của địa phương.
+              </p>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         STORY
+    ==================================================== -->
+
+    <section class="section alt">
+
+      <div class="container story-grid">
+
+
+        <div class="story-image">
+
+          <img
+            src="assets/img/bot-ech-frognutri.jpg"
+            alt="Nghiên cứu nguyên liệu FrogNutri"
+            onerror="
+              this.src='assets/img/frognutri-logo.jpg';
+            "
+          >
+
+        </div>
+
+
+        <div class="story-copy">
+
+          <span class="eyebrow">
+            🔬 Câu chuyện nghiên cứu
+          </span>
+
+          <h2>
+            Không chỉ là nguyên liệu,
+            mà là một hành trình nghiên cứu
+          </h2>
+
+          <p>
+            FrogNutri bắt đầu từ câu hỏi:
+            làm thế nào để những nguồn nguyên liệu
+            quen thuộc nhưng chưa được khai thác
+            hết giá trị có thể trở thành một sản phẩm
+            dinh dưỡng tiện lợi?
+          </p>
+
+          <p>
+            Từ đó, nhóm nghiên cứu tập trung vào
+            bột ếch và thử nghiệm kết hợp với
+            những nguyên liệu thực vật có màu sắc,
+            hương vị và câu chuyện gắn với địa phương.
+          </p>
+
+          <p>
+            Mỗi nguyên liệu được xem xét ở những
+            góc độ khác nhau như cảm quan,
+            khả năng phối trộn và tiềm năng
+            phát triển sản phẩm.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         RESEARCH
+    ==================================================== -->
+
+    <section class="section">
+
+      <div class="container">
+
+        <div class="research-box">
+
+          <span class="eyebrow">
+            🧪 FrogNutri Lab
+          </span>
+
+          <h2>
+            Từ nguyên liệu đến dữ liệu
+          </h2>
+
+          <p>
+            Việc phát triển FrogNutri không chỉ
+            dừng ở việc lựa chọn nguyên liệu.
+            Các mẫu thử được nghiên cứu,
+            kiểm nghiệm và đánh giá để từng bước
+            xây dựng cơ sở dữ liệu cho sản phẩm.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer class="footer">
+
+    <div class="container footer-grid">
+
+
+      <div>
+
+        <h3>
+          FrogNutri 🐸
+        </h3>
+
+        <p>
+          Từ giá trị bỏ quên đến
+          dinh dưỡng tiện lợi.
+        </p>
+
+        <p>
+          🌱 Tận dụng nguồn nguyên liệu,
+          nghiên cứu có dữ liệu
+          và phát triển sản phẩm địa phương.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <b>
+          Khám phá
+        </b>
+
+        <p>
+
+          <a href="product.html">
+            Sản phẩm
+          </a>
+
+          <br>
+
+          <a href="ingredients.html">
+            Nguyên liệu
+          </a>
+
+          <br>
+
+          <a href="research.html">
+            FrogNutri Lab
+          </a>
+
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <b>
+          Kết nối
+        </b>
+
+        <p>
+
+          <a href="ai.html">
+            AI &amp; Khảo sát
+          </a>
+
+          <br>
+
+          <a href="order.html">
+            Đặt hàng online
+          </a>
+
+          <br>
+
+          <a href="account.html">
+            Tài khoản
+          </a>
+
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </footer>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    const mobileToggle =
+      document.getElementById(
+        "mobileToggle"
+      );
+
+    const navLinks =
+      document.getElementById(
+        "navLinks"
+      );
+
+
+    mobileToggle.addEventListener(
+      "click",
+      function () {
+
+        navLinks.classList.toggle(
+          "show"
+        );
+
+      }
+    );
+
+
+    navLinks
+      .querySelectorAll("a")
+      .forEach(
+        function (link) {
+
+          link.addEventListener(
+            "click",
+            function () {
+
+              navLinks.classList.remove(
+                "show"
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    /* =====================================================
+       SHARED CART - FROGNUTRI
+       Đồng bộ với product.html / index.html / order.html
+    ====================================================== */
+
+    const CART_KEY = "frognutri_cart";
+
+
+    function getSharedCart() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(CART_KEY)
+        ) || [];
+
+      } catch (error) {
+
+        console.error(
+          "Không đọc được giỏ hàng:",
+          error
+        );
+
+        return [];
+
+      }
+
+    }
+
+
+    function updateSharedCartCount() {
+
+      const cart = getSharedCart();
+
+
+      const totalQuantity =
+        cart.reduce(
+          function (total, item) {
+
+            return total +
+              Number(item.quantity || 0);
+
+          },
+          0
+        );
+
+
+      document
+        .querySelectorAll("[data-cart-count]")
+        .forEach(
+          function (element) {
+
+            element.textContent =
+              totalQuantity;
+
+          }
+        );
+
+    }
+
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        updateSharedCartCount();
+
+      }
+    );
+
+
+    /* Đồng bộ khi thay đổi localStorage
+       từ tab/trang khác */
+    window.addEventListener(
+      "storage",
+      function (event) {
+
+        if (event.key === CART_KEY) {
+
+          updateSharedCartCount();
+
+        }
+
+      }
+    );
+
+
+    /* Đồng bộ lại khi quay lại trang */
+    window.addEventListener(
+      "pageshow",
+      function () {
+
+        updateSharedCartCount();
+
+      }
+    );
+
+  </script>
+
+
+<script src="script.js"></script></body>
+
+</html>

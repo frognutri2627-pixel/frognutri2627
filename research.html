@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FrogNutri Lab – hành trình nghiên cứu bột thân ếch và công thức kết hợp nguyên liệu thực vật địa phương.">
+  <title>FrogNutri Lab | Hành trình nghiên cứu</title>
+  <link rel="icon" href="assets/img/frognutri-logo.jpg">
+
+  <style>
+    :root{
+      --green:#2f9b63;--green-dark:#176c45;--green-deep:#103e2a;
+      --mint:#e9f8f0;--ink:#16382b;--text:#34483d;--muted:#667970;
+      --white:#fff;--line:#dbeae2;--orange:#e85b32;
+      --shadow:0 18px 55px rgba(23,76,52,.10);--radius:22px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,Arial,Helvetica,sans-serif;color:var(--ink);
+      background:linear-gradient(180deg,#fbfefc,#f7fcf9);line-height:1.65}
+    a{color:inherit;text-decoration:none} img{display:block;max-width:100%}
+    button{font:inherit;cursor:pointer}
+    .container{width:min(1160px,calc(100% - 36px));margin:auto}
+
+    .topbar{background:linear-gradient(90deg,#103e2a,#1d6946,#103e2a);color:#eaf8f0;font-size:13px}
+    .topbar .container{min-height:38px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+
+    .nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);
+      border-bottom:1px solid var(--line);backdrop-filter:blur(14px);box-shadow:0 8px 28px rgba(25,76,53,.05)}
+    .nav-inner{min-height:82px;display:flex;align-items:center;gap:22px}
+    .brand{display:flex;align-items:center;gap:11px;min-width:max-content}
+    .brand img{width:48px;height:48px;border-radius:14px;object-fit:cover}
+    .brand strong{display:block;color:var(--green-dark);font-size:19px;line-height:1.2}
+    .brand small{display:block;color:var(--muted);font-size:11px;line-height:1.3}
+    .links{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:4px}
+    .links a{padding:9px 10px;border-radius:10px;color:#3f5147;font-size:13px;font-weight:700;white-space:nowrap}
+    .links a:hover,.links a.active{color:var(--green-dark);background:var(--mint)}
+    .cart-link{display:inline-flex!important;align-items:center;gap:4px}
+    #cart-count{min-width:21px;height:21px;display:inline-flex;align-items:center;justify-content:center;
+      padding:0 5px;border-radius:999px;background:var(--orange);color:#fff;font-size:11px;font-weight:900}
+    .mobile-toggle{display:none;width:44px;height:44px;border:0;border-radius:12px;background:var(--mint);color:var(--green-dark);font-size:22px}
+
+    .hero{padding:78px 0 68px;background:
+      radial-gradient(circle at 88% 15%,#d8f1e3 0,transparent 31%),
+      radial-gradient(circle at 10% 100%,#f1e6f1 0,transparent 24%),
+      linear-gradient(135deg,#f2faf5,#fff)}
+    .eyebrow{display:inline-block;margin-bottom:12px;padding:5px 11px;border:1px solid #d4eddf;
+      border-radius:999px;background:var(--mint);color:var(--green-dark);font-size:12px;font-weight:900}
+    .hero h1{max-width:800px;margin-bottom:15px;color:var(--green-deep);font-size:clamp(38px,6vw,62px);line-height:1.04;letter-spacing:-.04em}
+    .lead{max-width:760px;color:var(--muted);font-size:17px}
+
+    .section{padding:72px 0}
+    .section.alt{background:#f0f9f4}
+    h2{color:var(--green-deep);font-size:clamp(28px,4vw,40px);line-height:1.15;letter-spacing:-.025em;margin-bottom:16px}
+    .intro{max-width:820px;margin-bottom:30px}
+    .intro p,.story p,.process-intro{color:var(--muted)}
+
+    .formula{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
+    .ingredient{padding:24px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,76,52,.07)}
+    .ingredient .num{color:var(--green);font-weight:900;font-size:13px}
+    .ingredient h3{margin:8px 0;color:var(--green-deep);font-size:19px}
+
+    .story{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center}
+    .story-image{overflow:hidden;border-radius:24px;box-shadow:var(--shadow);background:#eef8f2}
+    .story-image img{width:100%;height:390px;object-fit:cover}
+    .story-copy p{margin-top:12px}
+
+    .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px}
+    .step{padding:22px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px rgba(23,76,52,.06)}
+    .step strong{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:50%;
+      background:var(--mint);color:var(--green-dark);margin-bottom:10px}
+    .step h3{font-size:17px;color:var(--green-deep);margin-bottom:6px}
+    .step p{font-size:14px;color:var(--muted)}
+
+    /* Ảnh cho quy trình làm bột ếch */
+    .step{padding:0;overflow:hidden;transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}
+    .step:hover{transform:translateY(-7px);box-shadow:0 18px 38px rgba(23,76,52,.13);border-color:#b9dfc9}
+    .step-image{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(135deg,#e9f8f0,#d8f1e3);}
+    .step-image img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.7,.2,1),filter .35s ease}
+    .step:hover .step-image img{transform:scale(1.06);filter:saturate(1.06)}
+    .step-image.image-missing::after{content:attr(data-placeholder);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px;text-align:center;color:#176c45;font-size:13px;font-weight:800;background:radial-gradient(circle at 20% 20%,#fff9 0,transparent 40%),linear-gradient(135deg,#e9f8f0,#d8f1e3)}
+    .step-content{padding:20px 22px 23px}
+    .step-content strong{margin-bottom:10px}
+
+    /* Hiệu ứng xuất hiện khi cuộn */
+    .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}
+    .reveal.is-visible{opacity:1;transform:translateY(0)}
+    .ingredient,.cookie-step,.story-image,.story-copy,.intro,.hero .container{transition:transform .3s ease,box-shadow .3s ease}
+    .ingredient{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
+    .ingredient:hover{transform:translateY(-5px);box-shadow:0 16px 34px rgba(23,76,52,.11);border-color:#b9dfc9}
+    .hero .eyebrow{animation:gentleBob 3.5s ease-in-out infinite}
+    @keyframes gentleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+
+    .footer{padding:48px 0;background:#103e2a;color:#dcefe5}
+    .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
+    .footer h3{color:#fff;margin-bottom:8px}.footer b{color:#fff}.footer p{color:#c5ddd1;font-size:14px;margin-top:8px}
+    .footer a:hover{color:#fff}
+
+    /* Quy trình làm bánh quy phủ bột ếch */
+    .cookie-process{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:30px}
+    .cookie-step{overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 24px rgba(23,76,52,.07);transition:transform .2s ease,box-shadow .2s ease}
+    .cookie-step:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .cookie-step-image{width:100%;aspect-ratio:16/10;background:#e9f8f0;overflow:hidden}
+    .cookie-step-image img{width:100%;height:100%;object-fit:cover}
+    .cookie-step-content{padding:22px}
+    .cookie-step-number{display:inline-flex;width:36px;height:36px;align-items:center;justify-content:center;border-radius:50%;background:var(--mint);color:var(--green-dark);font-weight:900;margin-bottom:10px}
+    .cookie-step h3{color:var(--green-deep);font-size:19px;margin-bottom:8px}
+    .cookie-step p{color:var(--muted);font-size:14px}
+    .cookie-step:last-child{grid-column:1/-1}
+    .cookie-step:last-child .cookie-step-image{aspect-ratio:21/8}
+
+    @media(max-width:900px){
+      .links{display:none}.links.open{display:flex;position:absolute;left:18px;right:18px;top:82px;
+        padding:12px;flex-direction:column;align-items:stretch;background:#fff;border:1px solid var(--line);
+        border-radius:16px;box-shadow:var(--shadow)}
+      .mobile-toggle{display:block;margin-left:auto}
+      .formula,.process-grid,.cookie-process{grid-template-columns:repeat(2,1fr)}
+      .story{grid-template-columns:1fr}
+      .story-image{order:2}
+      .footer-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){
+      .topbar .container{padding:8px 0;align-items:flex-start;flex-direction:column;gap:2px}
+      .formula,.process-grid,.cookie-process{grid-template-columns:1fr}
+      .cookie-step:last-child{grid-column:auto}
+      .cookie-step:last-child .cookie-step-image{aspect-ratio:16/10}
+      .hero{padding:58px 0 52px}
+      .section{padding:55px 0}
+    }
+  </style>
+
+  <style>
+    /* FrogNutri shared navigation — matched to index.html */
+    .links{align-items:center;gap:clamp(8px,1vw,16px)}
+    .links a.social-nav{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border:1px solid #dcebe3;border-radius:999px;background:#fff;color:#245b43;font-size:13px;font-weight:750;line-height:1.3;text-decoration:none;white-space:nowrap;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+    .links a.social-nav:hover{transform:translateY(-2px);box-shadow:0 6px 18px #164e351a;background:#f2fbf5}
+    .links a.social-nav svg{display:block;width:18px;height:18px;fill:currentColor;flex:none}
+    .links a.social-nav.tiktok-nav{background:#17221d;color:#fff;border-color:#17221d}
+    .links a.social-nav.tiktok-nav:hover{background:#304b3e;color:#fff}
+    .links a.social-nav.facebook-nav{color:#1766d1}
+    @media(max-width:980px){.links a.social-nav{width:100%;justify-content:flex-start;border-radius:12px;padding:11px 13px}}
+    /* Cart UI is removed; checkout is on TikTok Shop. */
+    #cartOverlay,#cartDrawer,.cart-drawer,.cart-link,[data-cart-count],#openCartTop{display:none!important}
+    .auth-panel{box-shadow:0 18px 55px rgba(32,83,57,.08)}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script>window.FN_SUPABASE_URL ||= 'https://aoqshriypbwkadprzxgy.supabase.co';window.FN_SUPABASE_PUBLISHABLE_KEY ||= 'sb_publishable_5dpQ-GK4H4YSyUfcZ1b63A_YlLrsnnU';window.FN_SUPABASE_READY=true;document.documentElement.classList.add('fn-auth-check');</script>
+
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container">
+      <span>🐸 FrogNutri • Từ giá trị bỏ quên đến dinh dưỡng tiện lợi</span>
+      <span>🌱 Nghiên cứu • Phát triển • Đổi mới</span>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/frognutri-logo.jpg" alt="FrogNutri">
+        <div><strong>FrogNutri</strong><small>Từ giá trị bỏ quên đến dinh dưỡng tiện lợi.</small></div>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" type="button" aria-label="Mở menu" aria-expanded="false">☰</button>
+
+      <div class="links" id="navLinks">
+        <a href="index.html">Trang chủ</a>
+        <a href="product.html">Sản phẩm</a>
+        <a href="ingredients.html">Nguyên liệu</a>
+        <a class="active" href="research.html">FrogNutri Lab</a>
+        <a href="ai.html">Chat bot</a>
+        <a href="account.html">Tài khoản</a>
+
+        <a class="social-nav facebook-nav" href="https://www.facebook.com/share/1M3Qi7Em8s/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="FrogNutri trên Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8z"/></svg><span>Facebook</span></a>
+        <a class="social-nav tiktok-nav" href="https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j" target="_blank" rel="noopener noreferrer" aria-label="Đặt mua trên TikTok FrogNutri" title="TikTok Shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 7.1a6.8 6.8 0 0 1-4.2-1.4v8.1a5.8 5.8 0 1 1-5-5.7v3.2a2.7 2.7 0 1 0 1.9 2.6V2.5h3.1c.2 2 1.8 3.6 4.2 3.9z"/></svg><span>TikTok Shop</span></a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <span class="eyebrow">🧪 FrogNutri Lab</span>
+        <h1>Hành trình làm ra một mẻ bột</h1>
+        <p class="lead">Từ nguyên liệu đến sản phẩm là một quá trình gồm nhiều bước: sơ chế, xử lý, sấy, nghiền, phối hợp và đánh giá. FrogNutri ghi lại hành trình này để từng bước phát triển sản phẩm có cơ sở rõ ràng hơn.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="intro reveal">
+          <span class="eyebrow">🌿 Công thức nghiên cứu</span>
+          <h2>Thân ếch + sả + gừng + vỏ quế</h2>
+          <p>Đây là hướng kết hợp nguyên liệu được nghiên cứu nhằm tạo nên nền bột có đặc trưng riêng về mùi, vị và câu chuyện nguyên liệu địa phương.</p>
+        </div>
+
+        <div class="formula">
+          <article class="ingredient reveal"><span class="num">01</span><h3>🐸 Thân ếch</h3><p>Nền nguyên liệu chính của hướng nghiên cứu FrogNutri.</p></article>
+          <article class="ingredient reveal"><span class="num">02</span><h3>🌿 Sả</h3><p>Nguyên liệu thực vật quen thuộc, được xem xét trong phối hợp hương vị.</p></article>
+          <article class="ingredient reveal"><span class="num">03</span><h3>🫚 Gừng</h3><p>Thành phần được nghiên cứu để tạo nét đặc trưng cho công thức.</p></article>
+          <article class="ingredient reveal"><span class="num">04</span><h3>🌰 Vỏ quế</h3><p>Nguyên liệu tạo điểm nhấn về mùi và câu chuyện địa phương.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container story">
+        <div class="story-image reveal">
+          <img src="assets/img/bot-ech-frognutri.jpg" alt="Quá trình nghiên cứu bột FrogNutri"
+               onerror="this.src='assets/img/frognutri-logo.jpg';">
+        </div>
+        <div class="story-copy reveal">
+          <span class="eyebrow">🔬 Từ nguyên liệu đến sản phẩm</span>
+          <h2>Không chỉ làm ra bột, mà còn ghi lại từng bước</h2>
+          <p>Quy trình được chia thành các công đoạn để dễ theo dõi, đánh giá và điều chỉnh trong quá trình phát triển.</p>
+          <p>Mỗi mẻ thử nghiệm là một cơ hội để quan sát cảm quan, độ ổn định và khả năng phối hợp giữa các nguyên liệu trước khi tiếp tục hoàn thiện.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="intro reveal">
+          <span class="eyebrow">⚙️ Quy trình</span>
+          <h2>8 bước trong một mẻ nghiên cứu</h2>
+          <p class="process-intro">Các bước dưới đây mô tả hành trình từ nguyên liệu ban đầu đến mẫu bột dùng cho quá trình đánh giá.</p>
+        </div>
+
+        <div class="process-grid powder-process">
+          <article class="step reveal">
+            <div class="step-image" data-placeholder="📷 Thêm ảnh: bot-ech-1.jpg"><img src="assets/img/bot-ech-frognutri.jpg" alt="Bước 1: Sơ chế thân ếch" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('image-missing');"></div>
+            <div class="step-content"><strong>01</strong><h3>Sơ chế</h3><p>Làm sạch và chuẩn bị nguyên liệu thân ếch trước khi xử lý.</p></div>
+          </article>
+          <article class="step reveal">
+            <div class="step-image" data-placeholder="📷 Thêm ảnh: bot-ech-2.jpg"><img src="assets/img/bot-ech-2.jpg" alt="Bước 2: Hấp chín nguyên liệu" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('image-missing');"></div>
+            <div class="step-content"><strong>02</strong><h3>Hấp chín</h3><p>Xử lý nguyên liệu theo quy trình của mẻ thử nghiệm.</p></div>
+          </article>
+          <article class="step reveal">
+            <div class="step-image" data-placeholder="📷 Thêm ảnh: bot-ech-3.jpg"><img src="assets/img/bot-ech-3.jpg" alt="Bước 3: Xay nhuyễn nguyên liệu" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('image-missing');"></div>
+            <div class="step-content"><strong>03</strong><h3>Xay nhuyễn</h3><p>Tạo hỗn hợp đồng nhất hơn trước công đoạn sấy.</p></div>
+          </article>
+          <article class="step reveal">
+            <div class="step-image" data-placeholder="📷 Thêm ảnh: bot-ech-4.jpg"><img src="assets/img/bot-ech-4.jpg" alt="Bước 4: Sấy khô nguyên liệu" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('image-missing');"></div>
+            <div class="step-content"><strong>04</strong><h3>Sấy khô</h3><p>Giảm độ ẩm để tạo nền nguyên liệu phù hợp cho nghiền.</p></div>
+          </article>
+          <article class="step reveal">
+            <div class="step-image" data-placeholder="📷 Thêm ảnh: bot-ech-5.jpg"><img src="assets/img/bot-ech-5.jpg" alt="Bước 5: Nghiền và rây bột" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('image-missing');"></div>
+            <div class="step-content"><strong>05</strong><h3>Nghiền &amp; rây</h3><p>Điều chỉnh kích thước và độ đồng đều của bột.</p></div>
+          </article>
+          <article class="step reveal">
+            <div class="step-image" data-placeholder="📷 Thêm ảnh: bot-ech-6.jpg"><img src="assets/img/bot-ech-6.jpg" alt="Bước 6: Cân và đóng gói mẫu bột" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('image-missing');"></div>
+            <div class="step-content"><strong>06</strong><h3>Cân &amp; đóng gói</h3><p>Định lượng mẫu và chuẩn bị cho quá trình theo dõi.</p></div>
+          </article>
+          <article class="step reveal">
+            <div class="step-image" data-placeholder="📷 Thêm ảnh: bot-ech-7.jpg"><img src="assets/img/bot-ech-7.jpg" alt="Bước 7: Đánh giá mẫu bột ếch" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('image-missing');"></div>
+            <div class="step-content"><strong>07</strong><h3>Đánh giá</h3><p>Quan sát các đặc tính của mẫu và ghi nhận kết quả thử nghiệm.</p></div>
+          </article>
+          <article class="step reveal">
+            <div class="step-image" data-placeholder="📷 Thêm ảnh: bot-ech-8.jpg"><img src="assets/img/bot-ech-8.jpg" alt="Bước 8: Kiểm nghiệm mẫu bột ếch" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.classList.add('image-missing');"></div>
+            <div class="step-content"><strong>08</strong><h3>Kiểm nghiệm</h3><p>Khi cần, mẫu được gửi kiểm nghiệm để có thêm dữ liệu tham khảo.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="cookie-process">
+      <div class="container">
+        <div class="intro reveal">
+          <span class="eyebrow">🍪 Quy trình làm bánh</span>
+          <h2>Quy trình làm bánh quy phủ bột ếch</h2>
+          <p class="process-intro">Các bước làm bánh quy được ghi lại bằng hình ảnh để tiện theo dõi quá trình chuẩn bị nguyên liệu, tạo bánh, phủ bột và đóng gói thành phẩm.</p>
+        </div>
+
+        <div class="cookie-process">
+          <article class="cookie-step reveal">
+            <div class="cookie-step-image"><img src="assets/img/anh-1.jpg" alt="Bước 1: Hấp khoai" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#e9f8f0,#d8f1e3)';"></div>
+            <div class="cookie-step-content"><span class="cookie-step-number">01</span><h3>Hấp khoai</h3><p>Khoai được hấp chín để làm mềm, chuẩn bị cho công đoạn nhào cùng các nguyên liệu khác.</p></div>
+          </article>
+
+          <article class="cookie-step reveal">
+            <div class="cookie-step-image"><img src="assets/img/anh-2.jpg" alt="Bước 2: Nhào bột với khoai, đường ăn kiêng và dầu ô liu" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#e9f8f0,#d8f1e3)';"></div>
+            <div class="cookie-step-content"><span class="cookie-step-number">02</span><h3>Nhào bột và phối trộn</h3><p>Nhào bột cùng khoai đã hấp chín, đường ăn kiêng và dầu ô liu cho đến khi hỗn hợp hòa quyện, đạt độ kết dính phù hợp để tạo hình.</p></div>
+          </article>
+
+          <article class="cookie-step reveal">
+            <div class="cookie-step-image"><img src="assets/img/anh-3.jpg" alt="Bước 3: Nướng bánh" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#e9f8f0,#d8f1e3)';"></div>
+            <div class="cookie-step-content"><span class="cookie-step-number">03</span><h3>Nướng bánh</h3><p> Nướng bánh ở nhiệt độ 140 độ trong 45p </p></div>
+          </article>
+
+          <article class="cookie-step reveal">
+            <div class="cookie-step-image"><img src="assets/img/anh-4.jpg" alt="Bước 4: Rắc bột ếch lên bánh quy" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#e9f8f0,#d8f1e3)';"></div>
+            <div class="cookie-step-content"><span class="cookie-step-number">04</span><h3>Rắc bột ếch</h3><p>Rắc bột ếch lên mặt bánh, phân bố đều để tạo lớp phủ đặc trưng của bánh quy FrogNutri.</p></div>
+          </article>
+
+          <article class="cookie-step reveal">
+            <div class="cookie-step-image"><img src="assets/img/anh-5.jpg" alt="Bước 5: Đóng gói bánh quy phủ bột ếch" loading="lazy" onerror="this.onerror=null;this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#e9f8f0,#d8f1e3)';"></div>
+            <div class="cookie-step-content"><span class="cookie-step-number">05</span><h3>Đóng gói bao bì</h3><p>Sắp xếp bánh vào bao bì phù hợp, hoàn thiện nhãn và kiểm tra gói sản phẩm trước khi bảo quản hoặc giới thiệu đến người dùng.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>FrogNutri 🐸</h3>
+        <p>Từ giá trị bỏ quên đến dinh dưỡng tiện lợi.</p>
+        <p>🌱 Tận dụng nguồn nguyên liệu, nghiên cứu có dữ liệu và phát triển sản phẩm địa phương.</p>
+      </div>
+      <div>
+        <b>Khám phá</b>
+        <p><a href="product.html">Sản phẩm</a><br><a href="ingredients.html">Nguyên liệu</a><br><a href="research.html">FrogNutri Lab</a></p>
+      </div>
+      <div>
+        <b>Kết nối</b>
+        <p><a href="ai.html">Chat bot</a><br><a href="order.html">Đặt hàng online</a><br><a href="account.html">Tài khoản</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const CART_KEY = "frognutri_cart";
+    function updateSharedCartCount(){
+      let cart = [];
+      try { cart = JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e) {}
+      const total = cart.reduce((sum,item) => sum + Number(item.quantity || 0), 0);
+      document.querySelectorAll("[data-cart-count]").forEach(el => el.textContent = total);
+    }
+    document.addEventListener("DOMContentLoaded", updateSharedCartCount);
+    window.addEventListener("storage", e => { if(e.key === CART_KEY) updateSharedCartCount(); });
+    window.addEventListener("pageshow", updateSharedCartCount);
+
+    // Reveal khi cuộn trang; fallback hiển thị toàn bộ nếu trình duyệt không hỗ trợ.
+    const revealItems = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
+      revealItems.forEach((item, index) => {
+        item.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+        revealObserver.observe(item);
+      });
+    } else {
+      revealItems.forEach(item => item.classList.add("is-visible"));
+    }
+
+    const toggle = document.getElementById("mobileToggle");
+    const links = document.getElementById("navLinks");
+    if(toggle && links){
+      toggle.addEventListener("click", () => {
+        const isOpen = links.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        toggle.setAttribute("aria-label", isOpen ? "Đóng menu" : "Mở menu");
+      });
+    }
+  </script>
+</body>
+</html>

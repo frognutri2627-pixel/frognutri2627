@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="FrogNutri – từ giá trị bỏ quên đến dinh dưỡng tiện lợi.">
+<title>Trang chủ | FrogNutri</title>
+
+<link rel="icon" href="assets/img/frognutri-logo.jpg">
+<link rel="stylesheet" href="styles.css">
+
+<style>
+/* FrogNutri shared navigation polish */
+.links{align-items:center;gap:clamp(8px,1vw,16px)}
+.social-nav{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 10px;border:1px solid #dcebe3;border-radius:999px;background:#fff;color:#245b43;font-size:13px;font-weight:750;text-decoration:none;white-space:nowrap;transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.social-nav:hover{transform:translateY(-2px);box-shadow:0 6px 18px #164e351a;background:#f2fbf5}
+.social-nav svg{width:18px;height:18px;fill:currentColor;flex:none}
+.tiktok-nav{background:#17221d;color:#fff;border-color:#17221d}.tiktok-nav:hover{background:#304b3e;color:#fff}
+.facebook-nav{color:#1766d1}
+@media(max-width:980px){.links .social-nav{width:100%;justify-content:flex-start;border-radius:12px;padding:11px 13px}}
+/* Cart UI is intentionally removed; purchase checkout happens on TikTok Shop. */
+#cartOverlay,#cartDrawer,.cart-drawer,.cart-link,[data-cart-count],#openCartTop{display:none!important}
+.auth-panel{box-shadow:0 18px 55px rgba(32,83,57,.08)}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>window.FN_SUPABASE_URL ||= 'https://aoqshriypbwkadprzxgy.supabase.co';window.FN_SUPABASE_PUBLISHABLE_KEY ||= 'sb_publishable_5dpQ-GK4H4YSyUfcZ1b63A_YlLrsnnU';window.FN_SUPABASE_READY=true;document.documentElement.classList.add('fn-auth-check');</script>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <span>🐸 FrogNutri • Từ giá trị bỏ quên đến dinh dưỡng tiện lợi</span>
+    <span>🌱 Phiên bản phát triển 2026–2027</span>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="container nav-inner">
+
+    <a class="brand" href="index.html">
+      <img src="assets/img/frognutri-logo.jpg" alt="FrogNutri">
+      <div>
+        <strong>FrogNutri</strong>
+        <small>Từ giá trị bỏ quên đến dinh dưỡng tiện lợi.</small>
+      </div>
+    </a>
+
+    <button class="mobile-toggle" data-mobile aria-label="Mở menu">☰</button>
+
+    <div class="links">
+      <a class="active" href="index.html">Trang chủ</a>
+      <a href="product.html">Sản phẩm</a>
+      <a href="ingredients.html">Nguyên liệu</a>
+      <a href="research.html">FrogNutri Lab</a>
+      <a href="ai.html">Chat bot</a>
+      <a href="account.html">Tài khoản</a>
+    
+      <a class="social-nav facebook-nav" href="https://www.facebook.com/share/1M3Qi7Em8s/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="FrogNutri trên Facebook" title="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.3V13h2.8v8z"/></svg><span>Facebook</span></a>
+      <a class="social-nav tiktok-nav" href="https://www.tiktok.com/@frognutri_2627?_r=1&_t=ZS-9AWNxAIgA8j" target="_blank" rel="noopener noreferrer" aria-label="Đặt mua trên TikTok FrogNutri" title="TikTok Shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 7.1a6.8 6.8 0 0 1-4.2-1.4v8.1a5.8 5.8 0 1 1-5-5.7v3.2a2.7 2.7 0 1 0 1.9 2.6V2.5h3.1c.2 2 1.8 3.6 4.2 3.9z"/></svg><span>TikTok Shop</span></a>
+    </div>
+
+  </div>
+</nav>
+
+<main>
+
+<section class="hero">
+  <div class="container hero-grid">
+
+    <div>
+      <span class="eyebrow">🐸 Câu chuyện bắt đầu từ một câu hỏi</span>
+
+      <h1>Frog<span>Nutri</span></h1>
+
+      <h2>Từ giá trị bỏ quên đến dinh dưỡng tiện lợi.</h2>
+
+      <p class="lead">
+        Có những phần nguyên liệu không hẳn vô giá trị — chỉ là chúng chưa được nhìn bằng một góc nhìn khác.
+        FrogNutri bắt đầu từ phần thân ếch có giá trị kinh tế thấp, sau khi phần đùi được tách để phục vụ thị trường,
+        rồi đặt câu hỏi: liệu phần còn lại có thể được chế biến thành một sản phẩm tiện lợi,
+        có dữ liệu khoa học và có câu chuyện riêng?
+      </p>
+
+      <p class="lead">
+        Từ nền bột ếch, nhóm tiếp tục nghiên cứu những nguyên liệu thực vật mang dấu ấn địa phương
+        như khoai lang tím, củ hủ dừa và củ cải muối.
+      </p>
+
+      <div class="actions">
+        <a class="btn primary" href="product.html">Khám phá FrogNutri →</a>
+        <a class="btn secondary" href="research.html">Xem hành trình nghiên cứu</a>
+      </div>
+    </div>
+
+    <div class="hero-logo">
+      <img src="assets/img/frognutri-logo.jpg" alt="Logo FrogNutri">
+
+      <div class="note">
+        <b>Ý tưởng cốt lõi</b>
+        <p>
+          Ếch là nền tảng. Nguyên liệu địa phương là những nét chấm phá.
+          Dữ liệu kiểm nghiệm và trải nghiệm người dùng giúp nhóm quyết định
+          điều gì thật sự nên đi tiếp.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Điều FrogNutri muốn làm</span>
+        <h2>Không chỉ tận dụng nguyên liệu — mà là tạo lại giá trị</h2>
+      </div>
+
+      <p>
+        Mỗi lựa chọn đều phải trả lời được ba câu hỏi:
+        có ý nghĩa gì, có thể làm được không, và kết quả có đáng để giữ lại không.
+      </p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon mint">🐸</div>
+        <h3>Nguồn ếch</h3>
+        <p>
+          Nền tảng của dự án là nghiên cứu giá trị từ phần thân và xương ếch.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon lav">🧪</div>
+        <h3>Nghiên cứu trước khi chốt</h3>
+        <p>
+          Từng nguyên liệu được xử lý, tạo bột, đánh giá rồi mới thử phối trộn.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon pink">🌾</div>
+        <h3>Nguyên liệu địa phương</h3>
+        <p>
+          Khoai lang tím, củ hủ dừa và củ cải muối được nghiên cứu với vai trò riêng.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon peach">💻</div>
+        <h3>Công nghệ đi cùng sản phẩm</h3>
+        <p>
+          Website, khảo sát và đặt hàng tạo thành một nền tảng để sản phẩm tiến gần người dùng hơn.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section alt">
+  <div class="container">
+
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">🌾 Những nguyên liệu đang được nghiên cứu</span>
+        <h2>Bốn mảnh ghép, bốn vai trò</h2>
+      </div>
+
+      <a class="btn secondary" href="ingredients.html">
+        Khám phá câu chuyện →
+      </a>
+    </div>
+
+
+    <div class="ingredient-grid">
+
+      <article class="card ingredient-card">
+        <img
+          src="assets/img/bot-ech-frognutri.jpg"
+          alt="Sản phẩm bột FrogNutri">
+
+        <div class="copy">
+          <h3>🐸 Nền bột ếch</h3>
+          <p>
+            Nền tảng của FrogNutri — nghiên cứu từ thân và xương ếch.
+          </p>
+        </div>
+      </article>
+
+
+      <article class="card ingredient-card">
+        <img
+          src="assets/img/khoai-lang-tim.jpg"
+          alt="Khoai lang tím">
+
+        <div class="copy">
+          <h3>🟣 Khoai lang tím</h3>
+          <p>
+            Nguyên liệu thực vật được nghiên cứu về màu sắc và cảm quan.
+          </p>
+        </div>
+      </article>
+
+
+      <article class="card ingredient-card">
+        <img
+          src="assets/img/cu-cai-muoi.jpg"
+          alt="Củ cải muối">
+
+        <div class="copy">
+          <h3>🥕 Củ cải muối</h3>
+          <p>
+            Điểm nhấn hương vị, không phải thành phần chính.
+          </p>
+        </div>
+      </article>
+
+
+      <article class="card ingredient-card">
+        <img
+          src="assets/img/cu-hu-dua.jpg"
+          alt="Củ hủ dừa">
+
+        <div class="copy">
+          <h3>🌴 Củ hủ dừa</h3>
+          <p>
+            Thử nghiệm như một dấu ấn thực vật của địa phương.
+          </p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Hành trình</span>
+        <h2>Từ một câu hỏi đến một sản phẩm có dữ liệu</h2>
+      </div>
+    </div>
+
+    <div class="timeline">
+
+      <div class="step">
+        <div class="dot">1</div>
+        <p>Ý tưởng</p>
+      </div>
+
+      <div class="step">
+        <div class="dot">2</div>
+        <p>Nghiên cứu nguyên liệu</p>
+      </div>
+
+      <div class="step">
+        <div class="dot">3</div>
+        <p>Chế biến riêng</p>
+      </div>
+
+      <div class="step">
+        <div class="dot">4</div>
+        <p>Tạo bột</p>
+      </div>
+
+      <div class="step">
+        <div class="dot">5</div>
+        <p>Phối trộn</p>
+      </div>
+
+      <div class="step">
+        <div class="dot">6</div>
+        <p>Kiểm nghiệm</p>
+      </div>
+
+      <div class="step">
+        <div class="dot">7</div>
+        <p>Cải tiến</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container note">
+
+    <div class="split">
+
+      <div>
+        <span class="eyebrow">Dữ liệu đã có</span>
+
+        <h2>Minh bạch bằng kết quả kiểm nghiệm</h2>
+
+        <p>
+          Phiếu VietLabs ngày 12/02/2026 ghi nhận mẫu bột thân ếch có độ ẩm
+          4,57%, protein 57,4%, chất béo tổng 16,8% và canxi 5.676 mg/100 g.
+          Đây là dữ liệu của mẫu thử đã gửi phòng thí nghiệm.
+        </p>
+
+        <a class="btn primary" href="research.html">
+          Xem hành trình →
+        </a>
+      </div>
+
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>4,57%</strong>
+          <br>Độ ẩm mẫu
+        </div>
+
+        <div class="stat">
+          <strong>57,4%</strong>
+          <br>Protein
+        </div>
+
+        <div class="stat">
+          <strong>5.676</strong>
+          <br>mg Ca/100g
+        </div>
+
+        <div class="stat">
+          <strong>16,8%</strong>
+          <br>Chất béo tổng
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+  <div class="container footer-grid">
+
+    <div>
+      <h3>FrogNutri 🐸</h3>
+      <p>Từ giá trị bỏ quên đến dinh dưỡng tiện lợi.</p>
+      <p>
+        🌱 Tận dụng nguồn nguyên liệu, nghiên cứu có dữ liệu
+        và phát triển sản phẩm địa phương.
+      </p>
+    </div>
+
+    <div>
+      <b>Khám phá</b>
+      <p>
+        <a href="product.html">Sản phẩm</a><br>
+        <a href="ingredients.html">Nguyên liệu</a><br>
+        <a href="research.html">FrogNutri Lab</a>
+      </p>
+    </div>
+
+    <div>
+      <b>Kết nối</b>
+      <p>
+        <a href="ai.html">AI & Khảo sát</a><br>
+        <a href="order.html">Đặt hàng online</a><br>
+        <a href="account.html">Tài khoản</a>
+      </p>
+    </div>
+
+  </div>
+
+</footer>
+
+
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
