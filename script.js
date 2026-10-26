@@ -151,25 +151,8 @@
      AUTH
      ========================= */
 
-  FN.requireAuth = () => {
-
-    if (FN.user()) {
-      return true;
-    }
-
-    FN.toast('Vui lòng đăng nhập để tiếp tục.');
-
-    const button = document.querySelector(
-      '[data-open-auth="login"]'
-    );
-
-    if (button) {
-      button.click();
-    }
-
-    return false;
-  };
-
+  // Website is public: browsing does not require an account.
+  FN.requireAuth = () => true;
 
   /* =========================
      ADD TO CART
@@ -1079,30 +1062,10 @@
     });
     document.querySelectorAll('[data-mobile]').forEach(btn=>btn.addEventListener('click',()=>btn.closest('.nav-inner')?.querySelector('.links')?.classList.toggle('open')));
   }
-  function isAccountPage(){return /(?:^|\/)account\.html$/i.test(location.pathname);}
-  async function protectPages(){
-    if(isAccountPage()) { document.documentElement.classList.remove('fn-auth-check'); return; }
-    // Account management must always remain reachable so users can sign in/out.
-    if(!window.supabase || !window.FN_SUPABASE_URL || !window.FN_SUPABASE_PUBLISHABLE_KEY){
-      document.documentElement.classList.remove('fn-auth-check');
-      const msg=document.createElement('div');msg.className='note';msg.style.cssText='position:fixed;z-index:9999;left:16px;right:16px;top:16px';msg.textContent='Không thể khởi tạo đăng nhập. Hãy kiểm tra kết nối mạng và cấu hình Supabase.';document.body.prepend(msg);return;
-    }
-    try{
-      const client=window.__FN_AUTH_CLIENT||(window.__FN_AUTH_CLIENT=window.supabase.createClient(window.FN_SUPABASE_URL,window.FN_SUPABASE_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}));
-      const {data,error}=await client.auth.getSession();
-      if(error) throw error;
-      if(!data.session){
-        location.replace('account.html');return;
-      }
-      document.documentElement.classList.remove('fn-auth-check');
-      client.auth.onAuthStateChange((event,session)=>{
-        if(event==='SIGNED_OUT'||!session){location.replace('account.html');}
-      });
-    }catch(err){
-      document.documentElement.classList.remove('fn-auth-check');
-      console.error('FrogNutri auth check failed:',err);
-      const msg=document.createElement('div');msg.className='note';msg.style.cssText='position:fixed;z-index:9999;left:16px;right:16px;top:16px';msg.textContent='Chưa xác minh được phiên đăng nhập. Kiểm tra Internet, Supabase URL/key và thử mở website qua Live Server hoặc HTTPS.';document.body.prepend(msg);
-    }
+  // Public access: do not initialize auth or redirect visitors to an account page.
+  function protectPages(){
+    document.documentElement.classList.remove('fn-auth-check');
+    document.documentElement.style.visibility = 'visible';
   }
   document.addEventListener('DOMContentLoaded',()=>{unifyHeader();protectPages();});
 })();
